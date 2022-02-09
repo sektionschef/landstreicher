@@ -54,6 +54,8 @@ let right_temp
 let left_label
 let right_label
 
+let boxes_real = [];
+
 // // for FEATURE creation
 // chosen_palette = getRandomFromList(PALETTE);
 // PALETTE = chosen_palette.values;
@@ -230,20 +232,20 @@ function setup() {
       left_temp = {
         a: rectangle.a, b: rectangle.b, c: rectangle.c, d: rectangle.d
       }
-    }
-    if (rectangle.label == right_label) {
+    } else if (rectangle.label == right_label) {
       right_temp = {
         a: rectangle.a, b: rectangle.b, c: rectangle.c, d: rectangle.d
       }
+    } else {
+      boxes_real.push(rectangle)  // move to the final array 
     }
+
   }
 
   console.log(left_temp);
   console.log(right_temp);
 
-  label_counter += 1;
-
-  rects.push({
+  boxes_real.push({
     label: left_label + "+" + right_label,
     a: {
       x: left_temp.a.x,
@@ -276,13 +278,12 @@ function draw() {
 
   push();
   rectMode(CORNERS);
-  for (let rectangle of rects) {
+  for (let rectangle of boxes_real) {
     // fill(random(0, 255));
     rect(rectangle.a.x, rectangle.a.y, rectangle.c.x, rectangle.c.y);
   }
   pop();
 
-  // background(220);
   if (frameCount % 3 == 0) {
     line_coords.x += 1;
   }
