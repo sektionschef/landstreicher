@@ -40,6 +40,19 @@ let possible_combinations_x = [];
 let possible_combinations_y = [];
 
 let label_counter = 0;
+let line_coords = { x: 30, y: 40 }
+
+
+// how many combinations to provide
+let combinations_x = 2
+let combinations_y = 3
+let chosen_x
+
+let left_temp
+let right_temp
+
+let left_label
+let right_label
 
 // // for FEATURE creation
 // chosen_palette = getRandomFromList(PALETTE);
@@ -200,10 +213,55 @@ function setup() {
     }
   }
 
+  // console.log(possible_combinations_x);
+  // console.log(possible_combinations_y);
 
 
-  console.log(possible_combinations_x);
-  console.log(possible_combinations_y);
+  chosen_x = getRandomFromList(possible_combinations_x)
+  // console.log(chosen_x);
+  left_label = rects[(chosen_x.left - 1)].label
+  right_label = rects[(chosen_x.right - 1)].label
+  // console.log(left_label);
+  // console.log(right_label);
+
+  // combine them
+  for (let rectangle of rects) {
+    if (rectangle.label == left_label) {
+      left_temp = {
+        a: rectangle.a, b: rectangle.b, c: rectangle.c, d: rectangle.d
+      }
+    }
+    if (rectangle.label == right_label) {
+      right_temp = {
+        a: rectangle.a, b: rectangle.b, c: rectangle.c, d: rectangle.d
+      }
+    }
+  }
+
+  console.log(left_temp);
+  console.log(right_temp);
+
+  label_counter += 1;
+
+  rects.push({
+    label: left_label + "+" + right_label,
+    a: {
+      x: left_temp.a.x,
+      y: left_temp.a.y
+    },
+    b: {
+      x: right_temp.b.x,
+      y: right_temp.b.y
+    },
+    c: {
+      x: right_temp.b.x,
+      y: right_temp.b.y
+    },
+    d: {
+      x: left_temp.d.x,
+      y: left_temp.d.y
+    },
+  })
 
 }
 
@@ -223,6 +281,12 @@ function draw() {
     rect(rectangle.a.x, rectangle.a.y, rectangle.c.x, rectangle.c.y);
   }
   pop();
+
+  // background(220);
+  if (frameCount % 3 == 0) {
+    line_coords.x += 1;
+  }
+  circle(line_coords.x, line_coords.y, 2);
 
   // Engine.update(engine);
 }
