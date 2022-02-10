@@ -32,29 +32,17 @@ let SCALING_FACTOR = 1;
 let rescaling_width;
 let rescaling_height;
 
-let rects = [];
 let width_points = [];
 let height_points = [];
 
-let possible_combinations_x = [];
-let possible_combinations_y = [];
-
-let label_counter = 0;
-let line_coords = { x: 30, y: 40 }
-
+let line_coords = { x: 30, y: 40 };
 
 // how many combinations to provide
 let combinations_x = 2
 let combinations_y = 3
-let chosen_x
-
-let left_temp
-let right_temp
 
 let left_label
 let right_label
-
-let boxes_real = [];
 
 // // for FEATURE creation
 // chosen_palette = getRandomFromList(PALETTE);
@@ -164,109 +152,7 @@ function setup() {
   width_points = [0, 100, 200, 250, width]
   height_points = [0, 80, 180, height]
 
-  let columns_count = width_points.length - 1;
-  let row_count = height_points.length - 1;
-
-  let rects_count = (columns_count) * (row_count)
-  // save in rects
-  // console.log(rects_count)
-
-  for (let v = 0; v < (row_count); v++) {
-    for (let i = 0; i < (columns_count); i++) {
-      label_counter += 1;
-
-      rects.push({
-        label: (label_counter),
-        a: {
-          x: width_points[i],
-          y: height_points[v]
-        },
-        b: {
-          x: width_points[i + 1],
-          y: height_points[v]
-        },
-        c: {
-          x: width_points[i + 1],
-          y: height_points[v + 1]
-        },
-        d: {
-          x: width_points[i],
-          y: height_points[v + 1]
-        },
-      })
-    }
-  }
-
-  // console.log(rects);
-
-  // find out possible combinations
-  for (let i = 0; i < rects.length; i++) {
-    if (rects[i].label % columns_count != 0) {
-      possible_combinations_x.push({
-        left: rects[i].label,
-        right: rects[(i + 1)].label
-      })
-    }
-    // skip last row
-    if (rects[i].label <= (rects.length - columns_count)) {
-      possible_combinations_y.push({
-        left: rects[i].label,
-        right: rects[(i + row_count + 1)].label  // next row
-      })
-    }
-  }
-
-  // console.log(possible_combinations_x);
-  // console.log(possible_combinations_y);
-
-
-  chosen_x = getRandomFromList(possible_combinations_x)
-  // console.log(chosen_x);
-  left_label = rects[(chosen_x.left - 1)].label
-  right_label = rects[(chosen_x.right - 1)].label
-  // console.log(left_label);
-  // console.log(right_label);
-
-  // combine them
-  for (let rectangle of rects) {
-    if (rectangle.label == left_label) {
-      left_temp = {
-        a: rectangle.a, b: rectangle.b, c: rectangle.c, d: rectangle.d
-      }
-    } else if (rectangle.label == right_label) {
-      right_temp = {
-        a: rectangle.a, b: rectangle.b, c: rectangle.c, d: rectangle.d
-      }
-    } else {
-      boxes_real.push(rectangle)  // move to the final array 
-    }
-
-  }
-
-  console.log(left_temp);
-  console.log(right_temp);
-
-  boxes_real.push({
-    label: left_label + "+" + right_label,
-    a: {
-      x: left_temp.a.x,
-      y: left_temp.a.y
-    },
-    b: {
-      x: right_temp.b.x,
-      y: right_temp.b.y
-    },
-    c: {
-      x: right_temp.c.x,
-      y: right_temp.c.y
-    },
-    d: {
-      x: left_temp.d.x,
-      y: left_temp.d.y
-    },
-  })
-
-  // console.log(boxes_real);
+  boxes = new Boxes(width_points, height_points);
 
 }
 
@@ -276,27 +162,7 @@ function draw() {
   translate(-width / 2, -height / 2, 0);
   background(255);
 
-  if (logging.getLevel() <= 1) {
-  }
-
-  push();
-  textFont(font);
-  textSize(20 * SCALING_FACTOR);
-  rectMode(CORNERS);
-  for (let box_real of boxes_real) {
-    // console.log(box_real.label);
-    // fill(random(0, 255));
-    fill(133);
-    strokeWeight(6);
-    stroke(51);
-    rect(box_real.a.x, box_real.a.y, box_real.c.x, box_real.c.y);
-    fill(0)
-    center_x = (box_real.b.x - box_real.a.x) / 2
-    center_y = (box_real.d.y - box_real.a.y) / 2
-    text(box_real.label, box_real.a.x + center_x, box_real.a.y + center_y);
-    // circle(box_real.a.x + center_x, box_real.a.y + center_y, 2);
-  }
-  pop();
+  boxes.show();
 
   if (frameCount % 3 == 0) {
     line_coords.x += 1;
