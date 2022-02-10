@@ -138,6 +138,7 @@ let boxes_real = [];
 
 
 function preload() {
+  font = loadFont('SourceSansPro-Regular.otf');
 
 }
 
@@ -256,14 +257,16 @@ function setup() {
       y: right_temp.b.y
     },
     c: {
-      x: right_temp.b.x,
-      y: right_temp.b.y
+      x: right_temp.c.x,
+      y: right_temp.c.y
     },
     d: {
       x: left_temp.d.x,
       y: left_temp.d.y
     },
   })
+
+  // console.log(boxes_real);
 
 }
 
@@ -277,10 +280,21 @@ function draw() {
   }
 
   push();
+  textFont(font);
+  textSize(20 * SCALING_FACTOR);
   rectMode(CORNERS);
-  for (let rectangle of boxes_real) {
+  for (let box_real of boxes_real) {
+    // console.log(box_real.label);
     // fill(random(0, 255));
-    rect(rectangle.a.x, rectangle.a.y, rectangle.c.x, rectangle.c.y);
+    fill(133);
+    strokeWeight(6);
+    stroke(51);
+    rect(box_real.a.x, box_real.a.y, box_real.c.x, box_real.c.y);
+    fill(0)
+    center_x = (box_real.b.x - box_real.a.x) / 2
+    center_y = (box_real.d.y - box_real.a.y) / 2
+    text(box_real.label, box_real.a.x + center_x, box_real.a.y + center_y);
+    // circle(box_real.a.x + center_x, box_real.a.y + center_y, 2);
   }
   pop();
 
