@@ -16,6 +16,7 @@ class Boxes {
         // console.log(rects_count)
 
         this.create_virtual_boxes();
+        // console.log(this.virtual_boxes);
         this.scout_possible_combinations();
 
         this.choose_combination();
@@ -49,7 +50,6 @@ class Boxes {
                 })
             }
         }
-        //  console.log(virtual_boxes);
     }
 
     scout_possible_combinations() {
@@ -63,10 +63,13 @@ class Boxes {
                 })
             }
             // skip last row
+            // console.log(i + this.row_count + 1);
+            // console.log(this.row_count);
             if (this.virtual_boxes[i].label <= (this.virtual_boxes.length - this.columns_count)) {
                 this.possible_combinations_y.push({
                     left: this.virtual_boxes[i].label,
-                    right: this.virtual_boxes[(i + this.row_count + 1)].label  // next row
+                    // right: this.virtual_boxes[(i + this.row_count + 1)].label  // next row
+                    right: this.virtual_boxes[(i + this.columns_count)].label  // next row
                 })
             }
         }

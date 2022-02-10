@@ -13,10 +13,11 @@
 * farbe im hintergrund
 
 ## Tasks
-Auseinanderfallen - collapsen
-Abstand zwischen den schraffuren ist wichtig
-halo wie
-resize
+* minimalabstand
+* Auseinanderfallen - collapsen
+* Abstand zwischen den schraffuren ist wichtig
+* halo wie
+* resize
 
 
 

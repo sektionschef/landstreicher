@@ -1,7 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-const SWITCH_LOGGING_LEVEL = "info";
-// const SWITCH_LOGGING_LEVEL = "debug";
+// const SWITCH_LOGGING_LEVEL = "info";
+const SWITCH_LOGGING_LEVEL = "debug";
 
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = 1080;
@@ -32,8 +32,8 @@ let SCALING_FACTOR = 1;
 let rescaling_width;
 let rescaling_height;
 
-let width_points = [];
-let height_points = [];
+let width_points = [0];
+let height_points = [0];
 
 let line_coords = { x: 30, y: 40 };
 
@@ -149,8 +149,33 @@ function setup() {
 
 
   // add the min and max 
-  width_points = [0, 100, 200, 250, width]
-  height_points = [0, 80, 180, height]
+
+  // Coordinates for boxes
+  count_of_points_x = Math.floor(getRandomFromInterval(1, 5));
+  count_of_points_y = Math.floor(getRandomFromInterval(1, 5));
+
+  logging.info("Random points on x axis: " + count_of_points_x);
+  logging.info("Random points on y axis: " + count_of_points_y);
+
+  for (let i = 0; i < count_of_points_x; i++) {
+    width_points.push(Math.floor(getRandomFromInterval(0, width)));
+  }
+  for (let i = 0; i < count_of_points_y; i++) {
+    height_points.push(Math.floor(getRandomFromInterval(0, height)));
+  }
+
+  width_points.push(width);
+  height_points.push(height);
+
+  width_points.sort(function (a, b) {
+    return a - b;
+  });
+  height_points.sort(function (a, b) {
+    return a - b;
+  });
+
+  logging.debug("Coordinates of points on x axis: " + width_points);
+  logging.debug("Coordinates of points on y axis: " + height_points);
 
   boxes = new Boxes(width_points, height_points);
 
