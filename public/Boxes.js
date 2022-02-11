@@ -11,15 +11,25 @@ class Boxes {
         this.possible_combinations_y = [];
         this.real_boxes = [];
 
+
         // save in rects
         this.boxes_count = (this.columns_count) * (this.row_count)
         // console.log(rects_count)
 
+
         this.create_virtual_boxes();
         // console.log(this.virtual_boxes);
-        this.scout_possible_combinations();
 
-        this.choose_combination();
+        this.scout_possible_combinations();
+        this.real_boxes = this.virtual_boxes;
+
+        this.pairing_count_x = Math.floor(getRandomFromInterval(0, 3));
+        logging.info("Number of pairings on x axis: " + this.pairing_count_x);
+        if (this.pairing_count_x > 0) {
+            for (var i = 0; i < this.pairing_count_x; i++) {
+                this.choose_combination();
+            }
+        }
     }
 
     create_virtual_boxes() {
@@ -79,15 +89,18 @@ class Boxes {
     }
 
     choose_combination() {
-        let chosen_x;
-        chosen_x = getRandomFromList(this.possible_combinations_x)
-        // console.log(chosen_x);
+        // console.log(this.possible_combinations_x)
+        // let chosen_index = Math.floor(getRandomFromInterval(0, this.possible_combinations_x.length));
+        // console.log(chosen_index);
+        // let chosen_x = this.possible_combinations_x[chosen_index]
+        let chosen_x = getRandomFromList(this.possible_combinations_x)
+        console.log(this.real_boxes);
+        console.log(chosen_x);
 
-        left_label = this.virtual_boxes[(chosen_x.left - 1)].label
-        right_label = this.virtual_boxes[(chosen_x.right - 1)].label
+        left_label = this.real_boxes[(chosen_x.left - 1)].label
+        right_label = this.real_boxes[(chosen_x.right - 1)].label
         // console.log(left_label);
         // console.log(right_label);
-
 
         this.create_combination(left_label, right_label);
     }
@@ -97,9 +110,7 @@ class Boxes {
         let left_temp;
         let right_temp;
 
-        // TODO remove boxes already chosen - in a separate list
-
-        for (let box of this.virtual_boxes) {
+        for (let box of this.real_boxes) {
             if (box.label == left_label) {
                 left_temp = {
                     a: box.a, b: box.b, c: box.c, d: box.d
@@ -108,8 +119,9 @@ class Boxes {
                 right_temp = {
                     a: box.a, b: box.b, c: box.c, d: box.d
                 }
+
+                // remove simple box from array
             } else {
-                this.real_boxes.push(box)  // move to the final array 
             }
         }
 
@@ -136,6 +148,16 @@ class Boxes {
             },
         })
 
+
+        // remove simple box from array
+        for (var i = this.real_boxes.length - 1; i >= 0; i--) {
+            if (this.real_boxes[i].label == left_label) {
+                this.real_boxes.splice(i, 1);
+            }
+            if (this.real_boxes[i].label == right_label) {
+                this.real_boxes.splice(i, 1);
+            }
+        }
         // console.log(this.real_boxes);
     }
 

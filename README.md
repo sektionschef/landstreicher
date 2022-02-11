@@ -13,8 +13,9 @@
 * farbe im hintergrund
 
 ## Tasks
-* minimalabstand pro scale
 * zufällige anzahl der combinations auf basis der anzahl der boxen
+* pairings für x und y achsen
+* minimalabstand pro scale
 * Auseinanderfallen - collapsen
 * Abstand zwischen den schraffuren ist wichtig
 * halo wie
