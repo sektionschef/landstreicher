@@ -148,36 +148,8 @@ function setup() {
   // resize_canvas();
 
 
-  // add the min and max 
-
-  // Coordinates for boxes
-  count_of_points_x = Math.floor(getRandomFromInterval(1, 5));
-  count_of_points_y = Math.floor(getRandomFromInterval(1, 5));
-
-  logging.info("Random points on x axis: " + count_of_points_x);
-  logging.info("Random points on y axis: " + count_of_points_y);
-
-  for (let i = 0; i < count_of_points_x; i++) {
-    width_points.push(Math.floor(getRandomFromInterval(0, width)));
-  }
-  for (let i = 0; i < count_of_points_y; i++) {
-    height_points.push(Math.floor(getRandomFromInterval(0, height)));
-  }
-
-  width_points.push(width);
-  height_points.push(height);
-
-  width_points.sort(function (a, b) {
-    return a - b;
-  });
-  height_points.sort(function (a, b) {
-    return a - b;
-  });
-
-  logging.debug("Coordinates of points on x axis: " + width_points);
-  logging.debug("Coordinates of points on y axis: " + height_points);
-
-  boxes = new Boxes(width_points, height_points);
+  let points = create_coordinates_for_boxes();
+  boxes = new Boxes(points[0], points[1]);
 
 }
 
@@ -195,4 +167,37 @@ function draw() {
   circle(line_coords.x, line_coords.y, 2);
 
   // Engine.update(engine);
+}
+
+
+function create_coordinates_for_boxes() {
+  count_of_points_x = Math.floor(getRandomFromInterval(1, 5));
+  count_of_points_y = Math.floor(getRandomFromInterval(1, 5));
+
+  logging.info("Random points on x axis: " + count_of_points_x);
+  logging.info("Random points on y axis: " + count_of_points_y);
+
+  for (let i = 0; i < count_of_points_x; i++) {
+    width_points.push(Math.floor(getRandomFromInterval(0, width)));
+  }
+  for (let i = 0; i < count_of_points_y; i++) {
+    height_points.push(Math.floor(getRandomFromInterval(0, height)));
+  }
+
+  // add maximum
+  width_points.push(width);
+  height_points.push(height);
+
+  // simple sort
+  width_points.sort(function (a, b) {
+    return a - b;
+  });
+  height_points.sort(function (a, b) {
+    return a - b;
+  });
+
+  logging.debug("Coordinates of points on x axis: " + width_points);
+  logging.debug("Coordinates of points on y axis: " + height_points);
+
+  return [width_points, height_points]
 }

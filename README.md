@@ -13,12 +13,12 @@
 * farbe im hintergrund
 
 ## Tasks
-* minimalabstand
+* minimalabstand pro scale
+* zufällige anzahl der combinations auf basis der anzahl der boxen
 * Auseinanderfallen - collapsen
 * Abstand zwischen den schraffuren ist wichtig
 * halo wie
-* resize
-
+* resize incl. max size
 
 
 
