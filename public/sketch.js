@@ -51,6 +51,8 @@ PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
 logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
 // PAIRING_COUNT = 2;
 
+let lines;
+
 // // for FEATURE creation
 // chosen_palette = getRandomFromList(PALETTE);
 // PALETTE = chosen_palette.values;
@@ -156,7 +158,7 @@ function setup() {
   let points = create_coordinates_for_boxes();
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
 
-  lines = new Lines(20, 50);
+  lines = new Lines();
 
   resize_canvas();
 }
@@ -170,6 +172,7 @@ function draw() {
   boxes.show();
 
   lines.show();
+
   // Engine.update(engine);
 }
 
