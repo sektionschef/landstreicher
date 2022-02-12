@@ -84,8 +84,9 @@ class Boxes {
             }
         }
 
-        // console.log(this.possible_combinations_x);
-        // console.log(this.possible_combinations_y);
+        logging.debug("possible combinations to choose from - x: ");
+        logging.debug(this.possible_combinations_x);
+        logging.debug(this.possible_combinations_y);
     }
 
     choose_combination() {
@@ -105,6 +106,13 @@ class Boxes {
         // console.log(right_label);
 
         this.create_combination(left_label, right_label);
+
+        // remove used combination from the pool
+        for (var i = this.possible_combinations_x.length - 1; i >= 0; i--) {
+            if (this.possible_combinations_x[i] == chosen_x) {
+                this.possible_combinations_x.splice(i, 1);
+            }
+        }
     }
 
     create_combination(left_label, right_label) {
@@ -151,7 +159,7 @@ class Boxes {
         })
 
 
-        // remove simple box from array
+        // remove simple boxes from array, so they cannot be chosen again
         for (var i = this.real_boxes.length - 1; i >= 0; i--) {
             if (this.real_boxes[i].label == left_label) {
                 this.real_boxes.splice(i, 1);
