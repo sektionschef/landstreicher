@@ -44,10 +44,12 @@ let combinations_y = 3
 let left_label
 let right_label
 
+logging.info("FXHASH: " + fxhash);
 
 let PAIRING_COUNT;
-PAIRING_COUNT = Math.floor(getRandomFromInterval(0, 3));
-PAIRING_COUNT = 2;
+PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
+logging.info("PAIRING_COUNT: " + PAIRING_COUNT)
+// PAIRING_COUNT = 2;
 
 // // for FEATURE creation
 // chosen_palette = getRandomFromList(PALETTE);

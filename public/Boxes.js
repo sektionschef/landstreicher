@@ -5,25 +5,23 @@ class Boxes {
 
         this.columns_count = this.width_points.length - 1;
         this.row_count = this.height_points.length - 1;
+        this.boxes_count = (this.columns_count) * (this.row_count)
+        logging.debug("Grid with " + this.columns_count + " columns and " + this.row_count + " rows and " + this.boxes_count + " boxes.")
 
         this.virtual_boxes = [];
         this.possible_combinations_x = [];
         this.possible_combinations_y = [];
         this.real_boxes = [];
 
-
-        this.boxes_count = (this.columns_count) * (this.row_count)
-
         this.create_virtual_boxes();
-        // console.log(this.virtual_boxes);
 
         this.scout_possible_combinations();
         this.real_boxes = this.virtual_boxes;
 
         this.pairing_count = pairing_count;
         logging.info("Number of pairings: " + this.pairing_count);
-        if (this.pairing_count > 0 && this.possible_combinations_x.length > 0 && this.possible_combinations_y.length > 0) {
-            for (var i = 0; i < this.pairing_count; i++) {
+        for (var i = 0; i < this.pairing_count; i++) {
+            if (this.pairing_count > 0 && this.possible_combinations_x.length > 0 && this.possible_combinations_y.length > 0) {
                 this.choose_combination();
             }
         }
@@ -88,6 +86,9 @@ class Boxes {
     }
 
     choose_combination() {
+
+        logging.info(this.possible_combinations_x.length + " possible combinations for x.");
+        logging.info(this.possible_combinations_y.length + " possible combinations for y.");
 
         if (fxrand() >= 0.5) {
             this.chosen_axis = "x"
