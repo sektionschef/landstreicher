@@ -13,6 +13,7 @@
 * farbe im hintergrund
 
 ## Tasks
+* pairing statt combinations
 * zufällige anzahl der combinations auf basis der anzahl der boxen
 * pairings für x und y achsen
 * minimalabstand pro scale
