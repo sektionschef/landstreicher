@@ -163,8 +163,7 @@ function setup() {
 function draw() {
 
   translate(-width / 2, -height / 2, 0);
-  // background(255);
-  background(155);
+  background(255);
 
   boxes.show();
 

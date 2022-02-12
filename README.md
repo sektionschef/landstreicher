@@ -13,9 +13,6 @@
 * farbe im hintergrund
 
 ## Tasks
-* minimalabstand pro scale
-* resize
-* debug messages for pairing and co
 * Auseinanderfallen - collapsen
 * Abstand zwischen den schraffuren ist wichtig
 * vlt. ausdehnen der schraffune über boxgrenzen hinweg
