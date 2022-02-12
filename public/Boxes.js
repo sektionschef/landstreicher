@@ -86,22 +86,27 @@ class Boxes {
 
         logging.debug("possible combinations to choose from - x: ");
         logging.debug(this.possible_combinations_x);
-        logging.debug(this.possible_combinations_y);
+        // logging.debug("possible combinations to choose from - y: ");
+        // logging.debug(this.possible_combinations_y);
     }
 
     choose_combination() {
-        // console.log(this.possible_combinations_x)
-        // let chosen_index = Math.floor(getRandomFromInterval(0, this.possible_combinations_x.length));
-        // console.log(chosen_index);
-        // let chosen_x = this.possible_combinations_x[chosen_index]
 
-        // chosen twice
         let chosen_x = getRandomFromList(this.possible_combinations_x)
-        console.log(this.real_boxes);
+        // console.log(this.real_boxes);
+        console.log("chosen on x axis: ");
         console.log(chosen_x);
 
-        left_label = this.real_boxes[(chosen_x.left - 1)].label
-        right_label = this.real_boxes[(chosen_x.right - 1)].label
+        // get labels
+        for (var box of this.virtual_boxes) {
+            if (box.label == chosen_x.left) {
+                left_label = box.label;
+            }
+            if (box.label == chosen_x.right) {
+                right_label = box.label;
+            }
+        }
+
         // console.log(left_label);
         // console.log(right_label);
 
@@ -120,7 +125,7 @@ class Boxes {
         let left_temp;
         let right_temp;
 
-        for (let box of this.real_boxes) {
+        for (let box of this.virtual_boxes) {
             if (box.label == left_label) {
                 left_temp = {
                     a: box.a, b: box.b, c: box.c, d: box.d
@@ -129,8 +134,6 @@ class Boxes {
                 right_temp = {
                     a: box.a, b: box.b, c: box.c, d: box.d
                 }
-
-                // remove simple box from array
             } else {
             }
         }
@@ -138,7 +141,7 @@ class Boxes {
         // console.log(left_temp);
         // console.log(right_temp);
 
-        this.real_boxes.push({
+        let paired_box = {
             label: left_label + "+" + right_label,
             a: {
                 x: left_temp.a.x,
@@ -156,7 +159,12 @@ class Boxes {
                 x: left_temp.d.x,
                 y: left_temp.d.y
             },
-        })
+        };
+
+        logging.debug("adding newly paired box: ");
+        logging.debug(paired_box);
+
+        this.real_boxes.push(paired_box)
 
 
         // remove simple boxes from array, so they cannot be chosen again
