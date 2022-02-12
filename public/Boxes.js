@@ -1,12 +1,15 @@
 class Boxes {
     constructor(width_points, height_points, pairing_count) {
+        logging.debug("Creating boxes.");
         this.width_points = width_points;
         this.height_points = height_points;
+        this.pairing_count = pairing_count;
 
         this.columns_count = this.width_points.length - 1;
         this.row_count = this.height_points.length - 1;
         this.boxes_count = (this.columns_count) * (this.row_count)
-        logging.debug("Grid with " + this.columns_count + " columns and " + this.row_count + " rows and " + this.boxes_count + " boxes.")
+        logging.debug("Grid with " + this.columns_count + " columns, " + this.row_count + " rows, " + this.boxes_count + " boxes and " + this.pairing_count + " planned pairings.")
+
 
         this.virtual_boxes = [];
         this.possible_pairings_x = [];
@@ -16,15 +19,19 @@ class Boxes {
         this.create_virtual_boxes();
 
         this.scout_possible_pairings();
+
+        // populate the resulting boxes
         this.real_boxes = this.virtual_boxes;
 
-        this.pairing_count = pairing_count;
-        logging.info("Number of pairings: " + this.pairing_count);
         for (var i = 0; i < this.pairing_count; i++) {
             if (this.pairing_count > 0 && this.possible_pairings_x.length > 0 && this.possible_pairings_y.length > 0) {
                 this.choose_pairing();
+                this.pair();
+                this.remove_used_pairs();
             }
         }
+        logging.debug("The real boxes are:");
+        logging.debug(this.real_boxes);
     }
 
     create_virtual_boxes() {
@@ -55,6 +62,8 @@ class Boxes {
                 })
             }
         }
+        logging.debug("Virtual boxes:")
+        logging.debug(this.virtual_boxes)
     }
 
     scout_possible_pairings() {
@@ -68,8 +77,6 @@ class Boxes {
                 })
             }
             // skip last row
-            // console.log(i + this.row_count + 1);
-            // console.log(this.row_count);
             if (this.virtual_boxes[i].label <= (this.virtual_boxes.length - this.columns_count)) {
                 this.possible_pairings_y.push({
                     left: this.virtual_boxes[i].label,
@@ -79,46 +86,107 @@ class Boxes {
             }
         }
 
-        logging.debug("possible pairings to choose from - x: ");
+        logging.debug(this.possible_pairings_x.length + " possible combinations for x:");
         logging.debug(this.possible_pairings_x);
-        logging.debug("possible pairings to choose from - y: ");
+        logging.debug(this.possible_pairings_y.length + " possible combinations for y: ");
         logging.debug(this.possible_pairings_y);
     }
 
     choose_pairing() {
 
-        logging.info(this.possible_pairings_x.length + " possible combinations for x.");
-        logging.info(this.possible_pairings_y.length + " possible combinations for y.");
-
         if (fxrand() >= 0.5) {
             this.chosen_axis = "x"
             this.chosen = getRandomFromList(this.possible_pairings_x)
-            console.log("chosen on x axis: ");
-            console.log(this.chosen);
+            logging.debug("Pairing on the x axis with:");
+            logging.debug(this.chosen);
         } else {
             this.chosen_axis = "y"
             this.chosen = getRandomFromList(this.possible_pairings_y)
-            console.log("chosen on y axis: ");
+            logging.debug("Pairing on the y axis with:");
             console.log(this.chosen);
         }
+    }
 
-        // get labels
-        for (var box of this.virtual_boxes) {
+    pair() {
+
+        let left_temp;
+        let right_temp;
+
+        for (let box of this.virtual_boxes) {
             if (box.label == this.chosen.left) {
-                left_label = box.label;
-            }
-            if (box.label == this.chosen.right) {
-                right_label = box.label;
+                left_temp = {
+                    a: box.a, b: box.b, c: box.c, d: box.d
+                }
+                this.left_label = box.label
+            } else if (box.label == this.chosen.right) {
+                right_temp = {
+                    a: box.a, b: box.b, c: box.c, d: box.d
+                }
+                this.right_label = box.label;
+            } else {
             }
         }
 
-        logging.debug("left label: " + left_label);
-        logging.debug("right label: " + right_label);
+        if (this.chosen_axis == "x") {
+            this.paired_box = {
+                label: this.left_label + "+" + this.right_label,
+                a: {
+                    x: left_temp.a.x,
+                    y: left_temp.a.y
+                },
+                b: {
+                    x: right_temp.b.x,
+                    y: right_temp.b.y
+                },
+                c: {
+                    x: right_temp.c.x,
+                    y: right_temp.c.y
+                },
+                d: {
+                    x: left_temp.d.x,
+                    y: left_temp.d.y
+                },
+            };
+        } else {
+            this.paired_box = {
+                label: this.left_label + "+" + this.right_label,
+                a: {
+                    x: left_temp.a.x,
+                    y: left_temp.a.y
+                },
+                b: {
+                    x: left_temp.b.x,
+                    y: left_temp.b.y
+                },
+                c: {
+                    x: right_temp.c.x,
+                    y: right_temp.c.y
+                },
+                d: {
+                    x: right_temp.d.x,
+                    y: right_temp.d.y
+                },
+            };
+        }
 
+        logging.debug("Adding the newly paired box: ");
+        logging.debug(this.paired_box);
 
-        this.pair(left_label, right_label);
+        this.real_boxes.push(this.paired_box)
 
-        // remove used combination from both pools
+        logging.debug("Remove original boxes from array.");
+        for (var i = this.real_boxes.length - 1; i >= 0; i--) {
+            if (this.real_boxes[i].label == this.left_label) {
+                this.real_boxes.splice(i, 1);
+            }
+            if (this.real_boxes[i].label == this.right_label) {
+                this.real_boxes.splice(i, 1);
+            }
+        }
+    }
+
+    remove_used_pairs() {
+        logging.debug("Remove used pairs from both pools.")
         for (var i = this.possible_pairings_x.length - 1; i >= 0; i--) {
 
             if (
@@ -140,89 +208,6 @@ class Boxes {
                 this.possible_pairings_y.splice(i, 1);
             }
         }
-
-
-    }
-
-    pair(left_label, right_label) {
-
-        let left_temp;
-        let right_temp;
-
-        for (let box of this.virtual_boxes) {
-            if (box.label == left_label) {
-                left_temp = {
-                    a: box.a, b: box.b, c: box.c, d: box.d
-                }
-            } else if (box.label == right_label) {
-                right_temp = {
-                    a: box.a, b: box.b, c: box.c, d: box.d
-                }
-            } else {
-            }
-        }
-
-        // console.log(left_temp);
-        // console.log(right_temp);
-
-        if (this.chosen_axis == "x") {
-            this.paired_box = {
-                label: left_label + "+" + right_label,
-                a: {
-                    x: left_temp.a.x,
-                    y: left_temp.a.y
-                },
-                b: {
-                    x: right_temp.b.x,
-                    y: right_temp.b.y
-                },
-                c: {
-                    x: right_temp.c.x,
-                    y: right_temp.c.y
-                },
-                d: {
-                    x: left_temp.d.x,
-                    y: left_temp.d.y
-                },
-            };
-        } else {
-            this.paired_box = {
-                label: left_label + "+" + right_label,
-                a: {
-                    x: left_temp.a.x,
-                    y: left_temp.a.y
-                },
-                b: {
-                    x: left_temp.b.x,
-                    y: left_temp.b.y
-                },
-                c: {
-                    x: right_temp.c.x,
-                    y: right_temp.c.y
-                },
-                d: {
-                    x: right_temp.d.x,
-                    y: right_temp.d.y
-                },
-            };
-        }
-
-        logging.debug("adding newly paired box: ");
-        logging.debug(this.paired_box);
-
-        this.real_boxes.push(this.paired_box)
-
-
-        // remove simple boxes from array, so they cannot be chosen again
-        for (var i = this.real_boxes.length - 1; i >= 0; i--) {
-            if (this.real_boxes[i].label == left_label) {
-                this.real_boxes.splice(i, 1);
-            }
-            if (this.real_boxes[i].label == right_label) {
-                this.real_boxes.splice(i, 1);
-            }
-        }
-        // console.log(this.real_boxes);
     }
 
     show() {

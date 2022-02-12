@@ -48,7 +48,7 @@ logging.info("FXHASH: " + fxhash);
 
 let PAIRING_COUNT;
 PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
-logging.info("PAIRING_COUNT: " + PAIRING_COUNT)
+logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
 // PAIRING_COUNT = 2;
 
 // // for FEATURE creation
