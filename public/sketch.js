@@ -44,6 +44,11 @@ let combinations_y = 3
 let left_label
 let right_label
 
+
+let PAIRING_COUNT;
+PAIRING_COUNT = Math.floor(getRandomFromInterval(0, 3));
+PAIRING_COUNT = 2;
+
 // // for FEATURE creation
 // chosen_palette = getRandomFromList(PALETTE);
 // PALETTE = chosen_palette.values;
@@ -149,7 +154,7 @@ function setup() {
 
 
   let points = create_coordinates_for_boxes();
-  boxes = new Boxes(points[0], points[1]);
+  boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
 
 }
 

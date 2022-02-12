@@ -1,5 +1,5 @@
 class Boxes {
-    constructor(width_points, height_points) {
+    constructor(width_points, height_points, pairing_count) {
         this.width_points = width_points;
         this.height_points = height_points;
 
@@ -12,10 +12,7 @@ class Boxes {
         this.real_boxes = [];
 
 
-        // save in rects
         this.boxes_count = (this.columns_count) * (this.row_count)
-        // console.log(rects_count)
-
 
         this.create_virtual_boxes();
         // console.log(this.virtual_boxes);
@@ -23,11 +20,9 @@ class Boxes {
         this.scout_possible_combinations();
         this.real_boxes = this.virtual_boxes;
 
-        this.pairing_count = Math.floor(getRandomFromInterval(0, 3));
-        // OVErwrite
-        this.pairing_count = 2;
+        this.pairing_count = pairing_count;
         logging.info("Number of pairings: " + this.pairing_count);
-        if (this.pairing_count > 0) {
+        if (this.pairing_count > 0 && this.possible_combinations_x.length > 0 && this.possible_combinations_y.length > 0) {
             for (var i = 0; i < this.pairing_count; i++) {
                 this.choose_combination();
             }
@@ -122,12 +117,7 @@ class Boxes {
 
         this.create_combination(left_label, right_label);
 
-        // remove used combination from the pool
-        console.log("§masfaf");
-        console.log(this.chosen);
-        console.log(this.possible_combinations_x);
-        console.log("AFKAFJAJAJ");
-
+        // remove used combination from both pools
         for (var i = this.possible_combinations_x.length - 1; i >= 0; i--) {
 
             if (
@@ -139,7 +129,6 @@ class Boxes {
                 this.possible_combinations_x.splice(i, 1);
             }
         }
-        // remove used combination from the pool
         for (var i = this.possible_combinations_y.length - 1; i >= 0; i--) {
             if (
                 this.possible_combinations_y[i].left == this.chosen.left ||
