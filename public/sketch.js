@@ -152,26 +152,26 @@ function setup() {
   // Matter.Runner.run(engine)
   // engine.world.gravity.y = VERTICAL_GRAVITY;
 
-  // resize_canvas();
-
 
   let points = create_coordinates_for_boxes();
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
 
+  resize_canvas();
 }
 
 
 function draw() {
 
   translate(-width / 2, -height / 2, 0);
-  background(255);
+  // background(255);
+  background(155);
 
   boxes.show();
 
   if (frameCount % 3 == 0) {
     line_coords.x += 1;
   }
-  circle(line_coords.x, line_coords.y, 2);
+  circle(line_coords.x * SCALING_FACTOR, line_coords.y * SCALING_FACTOR, 2);
 
   // Engine.update(engine);
 }

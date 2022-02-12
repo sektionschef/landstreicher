@@ -224,12 +224,12 @@ class Boxes {
             fill(133);
             strokeWeight(6);
             stroke(51);
-            rect(box_real.a.x, box_real.a.y, box_real.c.x, box_real.c.y);
+            rect(box_real.a.x * SCALING_FACTOR, box_real.a.y * SCALING_FACTOR, box_real.c.x * SCALING_FACTOR, box_real.c.y * SCALING_FACTOR);
             fill(0)
-            center_x = (box_real.b.x - box_real.a.x) / 2
-            center_y = (box_real.d.y - box_real.a.y) / 2
+            center_x = (box_real.b.x - box_real.a.x) / 2 * SCALING_FACTOR
+            center_y = (box_real.d.y - box_real.a.y) / 2 * SCALING_FACTOR
             if (logging.getLevel() <= 1) {
-                text(box_real.label, box_real.a.x + center_x, box_real.a.y + center_y);
+                text(box_real.label, (box_real.a.x + center_x) * SCALING_FACTOR, (box_real.a.y + center_y) * SCALING_FACTOR);
             }
         }
         pop();
