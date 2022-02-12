@@ -1,5 +1,5 @@
 // these are the variables you can use as inputs to your algorithms
-// console.log(fxhash)   // the 64 chars hex number fed to your algorithm
+console.log("fxhash: " + fxhash)   // the 64 chars hex number fed to your algorithm
 // console.log(fxrand()) // deterministic PRNG function, use it instead of Math.random()
 
 // note about the fxrand() function 
@@ -28,8 +28,7 @@ window.$fxhashFeatures = {
 // this code writes the values to the DOM as an example
 // const containero = document.createElement("div")
 // containero.innerText = `
-//   random hash: ${fxhash}\n
-//   some pseudo random values: [ ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()},... ]\n
-//   Palette: ${window.$fxhashFeatures['Palette']}\n
+//   random hash: ${fxhash} \n
+//   some pseudo random values: [${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()}, ... ]\n
 // `
 // document.body.prepend(containero)

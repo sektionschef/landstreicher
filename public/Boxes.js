@@ -93,6 +93,8 @@ class Boxes {
         // let chosen_index = Math.floor(getRandomFromInterval(0, this.possible_combinations_x.length));
         // console.log(chosen_index);
         // let chosen_x = this.possible_combinations_x[chosen_index]
+
+        // chosen twice
         let chosen_x = getRandomFromList(this.possible_combinations_x)
         console.log(this.real_boxes);
         console.log(chosen_x);
