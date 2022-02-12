@@ -9,20 +9,20 @@ class Boxes {
         logging.debug("Grid with " + this.columns_count + " columns and " + this.row_count + " rows and " + this.boxes_count + " boxes.")
 
         this.virtual_boxes = [];
-        this.possible_combinations_x = [];
-        this.possible_combinations_y = [];
+        this.possible_pairings_x = [];
+        this.possible_pairings_y = [];
         this.real_boxes = [];
 
         this.create_virtual_boxes();
 
-        this.scout_possible_combinations();
+        this.scout_possible_pairings();
         this.real_boxes = this.virtual_boxes;
 
         this.pairing_count = pairing_count;
         logging.info("Number of pairings: " + this.pairing_count);
         for (var i = 0; i < this.pairing_count; i++) {
-            if (this.pairing_count > 0 && this.possible_combinations_x.length > 0 && this.possible_combinations_y.length > 0) {
-                this.choose_combination();
+            if (this.pairing_count > 0 && this.possible_pairings_x.length > 0 && this.possible_pairings_y.length > 0) {
+                this.choose_pairing();
             }
         }
     }
@@ -57,12 +57,12 @@ class Boxes {
         }
     }
 
-    scout_possible_combinations() {
+    scout_possible_pairings() {
 
         // skip boxes at the end of the row
         for (let i = 0; i < this.virtual_boxes.length; i++) {
             if (this.virtual_boxes[i].label % this.columns_count != 0) {
-                this.possible_combinations_x.push({
+                this.possible_pairings_x.push({
                     left: this.virtual_boxes[i].label,
                     right: this.virtual_boxes[(i + 1)].label
                 })
@@ -71,7 +71,7 @@ class Boxes {
             // console.log(i + this.row_count + 1);
             // console.log(this.row_count);
             if (this.virtual_boxes[i].label <= (this.virtual_boxes.length - this.columns_count)) {
-                this.possible_combinations_y.push({
+                this.possible_pairings_y.push({
                     left: this.virtual_boxes[i].label,
                     // right: this.virtual_boxes[(i + this.row_count + 1)].label  // next row
                     right: this.virtual_boxes[(i + this.columns_count)].label  // next row
@@ -79,25 +79,25 @@ class Boxes {
             }
         }
 
-        logging.debug("possible combinations to choose from - x: ");
-        logging.debug(this.possible_combinations_x);
-        logging.debug("possible combinations to choose from - y: ");
-        logging.debug(this.possible_combinations_y);
+        logging.debug("possible pairings to choose from - x: ");
+        logging.debug(this.possible_pairings_x);
+        logging.debug("possible pairings to choose from - y: ");
+        logging.debug(this.possible_pairings_y);
     }
 
-    choose_combination() {
+    choose_pairing() {
 
-        logging.info(this.possible_combinations_x.length + " possible combinations for x.");
-        logging.info(this.possible_combinations_y.length + " possible combinations for y.");
+        logging.info(this.possible_pairings_x.length + " possible combinations for x.");
+        logging.info(this.possible_pairings_y.length + " possible combinations for y.");
 
         if (fxrand() >= 0.5) {
             this.chosen_axis = "x"
-            this.chosen = getRandomFromList(this.possible_combinations_x)
+            this.chosen = getRandomFromList(this.possible_pairings_x)
             console.log("chosen on x axis: ");
             console.log(this.chosen);
         } else {
             this.chosen_axis = "y"
-            this.chosen = getRandomFromList(this.possible_combinations_y)
+            this.chosen = getRandomFromList(this.possible_pairings_y)
             console.log("chosen on y axis: ");
             console.log(this.chosen);
         }
@@ -116,35 +116,35 @@ class Boxes {
         logging.debug("right label: " + right_label);
 
 
-        this.create_combination(left_label, right_label);
+        this.pair(left_label, right_label);
 
         // remove used combination from both pools
-        for (var i = this.possible_combinations_x.length - 1; i >= 0; i--) {
+        for (var i = this.possible_pairings_x.length - 1; i >= 0; i--) {
 
             if (
-                this.possible_combinations_x[i].left == this.chosen.left ||
-                this.possible_combinations_x[i].left == this.chosen.right ||
-                this.possible_combinations_x[i].right == this.chosen.left ||
-                this.possible_combinations_x[i].right == this.chosen.right
+                this.possible_pairings_x[i].left == this.chosen.left ||
+                this.possible_pairings_x[i].left == this.chosen.right ||
+                this.possible_pairings_x[i].right == this.chosen.left ||
+                this.possible_pairings_x[i].right == this.chosen.right
             ) {
-                this.possible_combinations_x.splice(i, 1);
+                this.possible_pairings_x.splice(i, 1);
             }
         }
-        for (var i = this.possible_combinations_y.length - 1; i >= 0; i--) {
+        for (var i = this.possible_pairings_y.length - 1; i >= 0; i--) {
             if (
-                this.possible_combinations_y[i].left == this.chosen.left ||
-                this.possible_combinations_y[i].left == this.chosen.right ||
-                this.possible_combinations_y[i].right == this.chosen.left ||
-                this.possible_combinations_y[i].right == this.chosen.right
+                this.possible_pairings_y[i].left == this.chosen.left ||
+                this.possible_pairings_y[i].left == this.chosen.right ||
+                this.possible_pairings_y[i].right == this.chosen.left ||
+                this.possible_pairings_y[i].right == this.chosen.right
             ) {
-                this.possible_combinations_y.splice(i, 1);
+                this.possible_pairings_y.splice(i, 1);
             }
         }
 
 
     }
 
-    create_combination(left_label, right_label) {
+    pair(left_label, right_label) {
 
         let left_temp;
         let right_temp;

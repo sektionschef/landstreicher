@@ -13,12 +13,12 @@
 * farbe im hintergrund
 
 ## Tasks
-* pairing statt combinations
-* zufällige anzahl der combinations auf basis der anzahl der boxen
-* pairings für x und y achsen
 * minimalabstand pro scale
+* resize
+* debug messages for pairing and co
 * Auseinanderfallen - collapsen
 * Abstand zwischen den schraffuren ist wichtig
+* vlt. ausdehnen der schraffune über boxgrenzen hinweg
 * halo wie
 * resize incl. max size
 

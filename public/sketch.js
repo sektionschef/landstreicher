@@ -181,8 +181,8 @@ function create_coordinates_for_boxes() {
   count_of_points_x = Math.floor(getRandomFromInterval(1, 5));
   count_of_points_y = Math.floor(getRandomFromInterval(1, 5));
 
-  logging.info("Random points on x axis: " + count_of_points_x);
-  logging.info("Random points on y axis: " + count_of_points_y);
+  logging.info(count_of_points_x + " random points on x axis.");
+  logging.info(count_of_points_y + " random points on y axis.");
 
   for (let i = 0; i < count_of_points_x; i++) {
     width_points.push(Math.floor(getRandomFromInterval(0, width)));
@@ -191,7 +191,7 @@ function create_coordinates_for_boxes() {
     height_points.push(Math.floor(getRandomFromInterval(0, height)));
   }
 
-  // add maximum
+  // add width and height
   width_points.push(width);
   height_points.push(height);
 
@@ -202,6 +202,19 @@ function create_coordinates_for_boxes() {
   height_points.sort(function (a, b) {
     return a - b;
   });
+
+  let minimum_distance_x = (width / 10)
+  for (var i = width_points.length - 1; i >= 0; i--) {
+    if ((width_points[(i)] - width_points[i - 1]) < minimum_distance_x) {
+      width_points.splice(i, 1);
+    }
+  }
+  let minimum_distance_y = (height / 10)
+  for (var i = height_points.length - 1; i >= 0; i--) {
+    if ((height_points[(i)] - height_points[i - 1]) < minimum_distance_y) {
+      height_points.splice(i, 1);
+    }
+  }
 
   logging.debug("Coordinates of points on x axis: " + width_points);
   logging.debug("Coordinates of points on y axis: " + height_points);
