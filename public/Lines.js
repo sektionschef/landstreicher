@@ -15,7 +15,7 @@ class Line {
         if (this.x <= this.limit_x) {
             this.x += STROKE_SPEED;
             this.history.push(createVector(this.x, this.y));
-            // this.y = this.y + (fxrand() * 0.3);
+            this.y = this.y + getRandomFromInterval(-0.3, 0.3);
         }
 
         push();
@@ -37,11 +37,11 @@ class Lines {
     constructor(x_start, y_start, x_stop, y_stop, padding_x, padding_y, distance_between_lines) {
         this.x_start = x_start;
         this.y_start = y_start;
-        this.x_stop = x_stop; // 180
+        this.x_stop = x_stop;
         this.y_stop = y_stop;
-        this.padding_x = padding_x;  // 20
-        this.padding_y = padding_y;  // 40
-        this.distance_between_lines = distance_between_lines;  // 30
+        this.padding_x = padding_x;
+        this.padding_y = padding_y;
+        this.distance_between_lines = distance_between_lines;
 
         this.count_lines = ((this.y_stop - this.y_start) - 2 * this.padding_y) / this.distance_between_lines;
         this.bodies = [];

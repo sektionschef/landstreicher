@@ -14,6 +14,7 @@
 
 ## Tasks
 * Auseinanderfallen - collapsen
+* in den linien löcher drin, rechtecke drin
 * Abstand zwischen den schraffuren ist wichtig
 * vlt. ausdehnen der schraffune über boxgrenzen hinweg
 * halo wie
