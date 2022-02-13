@@ -15,7 +15,7 @@ class Line {
         if (this.x <= this.limit_x) {
             this.x += STROKE_SPEED;
             this.history.push(createVector(this.x, this.y));
-            this.y = this.y + getRandomFromInterval(-0.3, 0.3);
+            this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
         }
 
         push();

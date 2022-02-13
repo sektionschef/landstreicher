@@ -19,6 +19,7 @@
 * vlt. ausdehnen der schraffune über boxgrenzen hinweg
 * halo wie
 * resize incl. max size
+* mehrfach nachzeichnen den selben path
 
 
 
