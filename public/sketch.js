@@ -213,15 +213,17 @@ function keyPressed() {
     // for (box of boxes.real_boxes)
     console.log(boxes.real_boxes[0].lines.bodies[0].history);
 
+    for (var line of boxes.real_boxes[0].lines.bodies) {
 
-    horst = Body.create({
-      position: { x: 300, y: 300 },
-      vertices: boxes.real_boxes[0].lines.bodies[0].history, //, ...options
-    });
+      new_object = Body.create({
+        // position: { x: boxes.real_boxes[0].lines.bodies[0].history[0].x, y: boxes.real_boxes[0].lines.bodies[0].history[0].y },
+        position: { x: line.history[0].x, y: line.history[0].y },
+        vertices: line.history, //, ...options
+      });
+      physical_objects.push(new_object)
+      World.add(world, new_object);
+    }
 
-    // horst = Bodies.circle(300, 300, 10);
-    physical_objects.push(horst)
 
-    World.add(world, horst)
   }
 }

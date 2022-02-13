@@ -14,11 +14,17 @@ class Line {
             if (this.x <= this.limit_x) {
                 this.x += STROKE_SPEED;
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                if (frameCount % 5 == 0) {
+                    this.history.push(createVector(this.x, this.y));
+                }
             }
         } else if (this.orientation == "y") {
             if (this.y <= this.limit_y) {
                 this.y += STROKE_SPEED;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                if (frameCount % 5 == 0) {
+                    this.history.push(createVector(this.x, this.y));
+                }
             }
         } else if (this.orientation == "xy") {
             if (this.x <= this.limit_x && this.y <= this.limit_y) {
@@ -26,15 +32,12 @@ class Line {
                 this.y += STROKE_SPEED;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                if (frameCount % 5 == 0) {
+                    this.history.push(createVector(this.x, this.y));
+                }
             }
         }
 
-        // PUT TO END
-        if (frameCount % 10 == 0) {
-            // if (this.x - this.history[(this.history.length - 1)].x != 0) {
-            this.history.push(createVector(this.x, this.y));
-            // }
-        }
 
         push();
         strokeWeight(STROKE_SIZE);
