@@ -51,6 +51,16 @@ PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
 logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
 // PAIRING_COUNT = 2;
 
+let PADDING_X;
+let PADDING_Y;
+let DISTANCE_BETWEEN_LINES;
+let STROKE_SPEED;
+
+PADDING_X = 20;
+PADDING_Y = 60;
+DISTANCE_BETWEEN_LINES = 10;
+STROKE_SPEED = 1;
+
 let lines;
 
 // // for FEATURE creation

@@ -13,9 +13,9 @@ class Line {
     show() {
 
         if (this.x <= this.limit_x) {
-            this.x += 5;
+            this.x += STROKE_SPEED;
             this.history.push(createVector(this.x, this.y));
-            // this.y = this.y + (fxrand() * 0.01);
+            // this.y = this.y + (fxrand() * 0.3);
         }
 
         push();
@@ -46,11 +46,13 @@ class Lines {
         this.count_lines = ((this.y_stop - this.y_start) - 2 * this.padding_y) / this.distance_between_lines;
         this.bodies = [];
 
+        // console.log(this.x_start + this.padding_x);
+
         for (let i = 0; i < this.count_lines; i++) {
             this.bodies.push(new Line(
                 (this.x_start + this.padding_x),
                 (this.y_start + this.padding_y + this.distance_between_lines * i),
-                this.x_stop,
+                (this.x_stop - this.padding_x),
                 this.y_stop));
         }
     }
