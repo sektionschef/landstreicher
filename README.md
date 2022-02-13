@@ -18,6 +18,7 @@
 * vlt. ausdehnen der schraffune über boxgrenzen hinweg
 * resize incl. max size
 * mehrfach nachzeichnen den selben path
+* nochmal durchschraffieren
 
 
 # Environment

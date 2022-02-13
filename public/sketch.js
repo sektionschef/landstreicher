@@ -35,6 +35,8 @@ let rescaling_height;
 let width_points = [0];
 let height_points = [0];
 
+let physical_objects = [];
+
 let line_coords = { x: 30, y: 40 };
 
 // how many combinations to provide
@@ -161,14 +163,14 @@ function setup() {
 
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
-  // engine = Engine.create();
-  // world = engine.world;
+  engine = Engine.create();
+  world = engine.world;
 
   const VERTICAL_GRAVITY = 1;
   // const VERTICAL_GRAVITY = getRandomFromInterval(0.05, 0.5);
 
-  // Matter.Runner.run(engine)
-  // engine.world.gravity.y = VERTICAL_GRAVITY;
+  Matter.Runner.run(engine)
+  engine.world.gravity.y = VERTICAL_GRAVITY;
 
 
   let points = create_coordinates_for_boxes();
@@ -188,7 +190,38 @@ function draw() {
   boxes.show();
   boxes.show_lines();
 
+  for (var object of physical_objects) {
+    push();
+    strokeWeight(1);
+    fill(255, 0, 0, 50);
+    beginShape();
+    for (var i = 0; i < object.vertices.length; i++) {
+      vertex(object.vertices[i].x, object.vertices[i].y);
+    }
+    endShape(CLOSE);
+    pop();
+  }
 
-  // Engine.update(engine);
+  Engine.update(engine);
 }
 
+
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    console.log("left arrow pressed");
+
+    // for (box of boxes.real_boxes)
+    console.log(boxes.real_boxes[0].lines.bodies[0].history);
+
+
+    horst = Body.create({
+      position: { x: 300, y: 300 },
+      vertices: boxes.real_boxes[0].lines.bodies[0].history, //, ...options
+    });
+
+    // horst = Bodies.circle(300, 300, 10);
+    physical_objects.push(horst)
+
+    World.add(world, horst)
+  }
+}

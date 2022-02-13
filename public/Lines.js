@@ -29,7 +29,12 @@ class Line {
             }
         }
 
-        this.history.push(createVector(this.x, this.y));
+        // PUT TO END
+        if (frameCount % 10 == 0) {
+            // if (this.x - this.history[(this.history.length - 1)].x != 0) {
+            this.history.push(createVector(this.x, this.y));
+            // }
+        }
 
         push();
         strokeWeight(STROKE_SIZE);
