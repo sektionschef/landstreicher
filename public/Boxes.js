@@ -32,6 +32,8 @@ class Boxes {
         }
         logging.debug("The real boxes are:");
         logging.debug(this.real_boxes);
+
+        this.create_lines();
     }
 
     create_virtual_boxes() {
@@ -210,6 +212,12 @@ class Boxes {
         }
     }
 
+    create_lines() {
+        for (let box_real of this.real_boxes) {
+            box_real.lines = new Lines();
+        }
+    }
+
     show() {
         let center_x;
         let center_y;
@@ -233,6 +241,12 @@ class Boxes {
             }
         }
         pop();
+    }
+
+    show_lines() {
+        for (let box_real of this.real_boxes) {
+            box_real.lines.show();
+        }
     }
 }
 

@@ -158,8 +158,6 @@ function setup() {
   let points = create_coordinates_for_boxes();
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
 
-  lines = new Lines();
-
   resize_canvas();
 }
 
@@ -170,8 +168,7 @@ function draw() {
   background(255);
 
   boxes.show();
-
-  lines.show();
+  boxes.show_lines();
 
   // Engine.update(engine);
 }

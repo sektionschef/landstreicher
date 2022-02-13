@@ -29,14 +29,12 @@ class Line {
         endShape();
         pop();
 
-        // console.log(this.x)
         circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, this.size);
     }
 }
 
 class Lines {
     constructor() {
-
         this.distance_between_lines = 30;
         this.padding_x = 20;
         this.padding_y = 40;
