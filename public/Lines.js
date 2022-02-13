@@ -34,15 +34,22 @@ class Line {
 }
 
 class Lines {
-    constructor() {
-        this.distance_between_lines = 30;
-        this.padding_x = 20;
-        this.padding_y = 40;
+    constructor(x_start, y_start, x_stop, padding_x, padding_y, distance_between_lines) {
+        this.x_start = x_start;
+        this.y_start = y_start;
+        this.x_stop = x_stop; // 180
+        this.padding_x = padding_x;  // 20
+        this.padding_y = padding_y;  // 40
+        this.distance_between_lines = distance_between_lines;  // 30
+
         this.count_lines = (height - 2 * this.padding_y) / this.distance_between_lines;
         this.bodies = [];
 
         for (let i = 0; i < this.count_lines; i++) {
-            this.bodies.push(new Line(this.padding_x, (this.padding_y + this.distance_between_lines * i), 180));
+            this.bodies.push(new Line(
+                (this.x_start + this.padding_x),
+                (this.x_start + this.padding_y + this.distance_between_lines * i),
+                this.x_stop));
         }
     }
 
