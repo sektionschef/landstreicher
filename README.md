@@ -13,14 +13,11 @@
 * farbe im hintergrund
 
 ## Tasks
-* Auseinanderfallen - collapsen
+* Auseinanderfallen - collapsen, randomly jeder einzelne - create body
 * in den linien löcher drin, rechtecke drin
-* Abstand zwischen den schraffuren ist wichtig
 * vlt. ausdehnen der schraffune über boxgrenzen hinweg
-* halo wie
 * resize incl. max size
 * mehrfach nachzeichnen den selben path
-
 
 
 # Environment
