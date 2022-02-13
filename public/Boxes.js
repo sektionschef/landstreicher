@@ -214,7 +214,7 @@ class Boxes {
 
     create_lines() {
         for (let box_real of this.real_boxes) {
-            box_real.lines = new Lines(0, 0, 180, 20, 40, 30);
+            box_real.lines = new Lines(box_real.a.x, box_real.a.y, box_real.b.x, box_real.c.y, 20, 40, 30);
         }
     }
 
