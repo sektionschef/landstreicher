@@ -6,6 +6,8 @@ class Line {
         this.limit_x = limit_x;
         this.limit_y = limit_y;
         this.history = [];
+
+        this.run_complete = false;
     }
 
     show() {
@@ -14,17 +16,21 @@ class Line {
             if (this.x <= this.limit_x) {
                 this.x += STROKE_SPEED;
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                if (frameCount % 5 == 0) {
+                if (frameCount % STROKE_RESOLUTION == 0) {
                     this.history.push(createVector(this.x, this.y));
                 }
+            } else {
+                this.run_complete = true;
             }
         } else if (this.orientation == "y") {
             if (this.y <= this.limit_y) {
                 this.y += STROKE_SPEED;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                if (frameCount % 5 == 0) {
+                if (frameCount % STROKE_RESOLUTION == 0) {
                     this.history.push(createVector(this.x, this.y));
                 }
+            } else {
+                this.run_complete = true;
             }
         } else if (this.orientation == "xy") {
             if (this.x <= this.limit_x && this.y <= this.limit_y) {
@@ -32,12 +38,15 @@ class Line {
                 this.y += STROKE_SPEED;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                if (frameCount % 5 == 0) {
+                if (frameCount % STROKE_RESOLUTION == 0) {
                     this.history.push(createVector(this.x, this.y));
                 }
+            } else {
+                this.run_complete = true;
             }
         }
 
+        // console.log(this.history.length)
 
         push();
         strokeWeight(STROKE_SIZE);
@@ -57,6 +66,13 @@ class Line {
         circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, STROKE_SIZE);
         pop()
 
+
+        // if (
+        //     (this.history.length > 0) &
+        //     (this.history[this.history.length == )
+        // ) {
+        //     console.log("Stop");
+        // }
     }
 }
 
@@ -71,6 +87,7 @@ class Lines {
         this.distance_between_lines = distance_between_lines;
 
         this.bodies = [];
+        this.all_lines_complete = false;
 
         let chosen_axis = getRandomFromList(["x", "y", "xy"])
         logging.debug(chosen_axis + " axis randomly chosen.");
@@ -125,5 +142,15 @@ class Lines {
         for (var line of this.bodies) {
             line.show();
         }
+    }
+
+    check_all_complete() {
+        this.all_lines_complete = true;
+        for (var line of this.bodies) {
+            if (line.run_complete == false) {
+                this.all_lines_complete = false;
+            }
+        }
+
     }
 }

@@ -16,6 +16,8 @@ class Boxes {
         this.possible_pairings_y = [];
         this.real_boxes = [];
 
+        this.boxes_completely_run = false;
+
         this.create_virtual_boxes();
 
         this.scout_possible_pairings();
@@ -222,16 +224,21 @@ class Boxes {
         let center_x;
         let center_y;
 
+
         push();
         textFont(font);
         textSize(20 * SCALING_FACTOR);
         rectMode(CORNERS);
         for (let box_real of this.real_boxes) {
             // console.log(box_real.label);
-            // fill(random(0, 255));
-            fill(133);
-            strokeWeight(6);
-            stroke(51);
+            // fill(133);
+            fill(255);
+            if (logging.getLevel() <= 1) {
+                strokeWeight(6);
+                stroke(51);
+            } else {
+                noStroke();
+            }
             rect(box_real.a.x * SCALING_FACTOR, box_real.a.y * SCALING_FACTOR, box_real.c.x * SCALING_FACTOR, box_real.c.y * SCALING_FACTOR);
             fill(0)
             center_x = (box_real.b.x - box_real.a.x) / 2 * SCALING_FACTOR
@@ -244,8 +251,21 @@ class Boxes {
     }
 
     show_lines() {
+
         for (let box_real of this.real_boxes) {
             box_real.lines.show();
+        }
+    }
+
+    check_boxes_complete() {
+
+        this.boxes_completely_run = true;
+
+        for (let box_real of this.real_boxes) {
+            box_real.lines.check_all_complete();
+            if (box_real.lines.all_lines_complete == false) {
+                this.boxes_completely_run = false;
+            }
         }
     }
 }

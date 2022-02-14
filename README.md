@@ -13,6 +13,10 @@
 * farbe im hintergrund
 
 ## Tasks
+* performance
+* letzte schräge noch
+* vom winde verweht
+* shadow
 * Auseinanderfallen - collapsen, randomly jeder einzelne - create body
 * in den linien löcher drin, rechtecke drin
 * vlt. ausdehnen der schraffune über boxgrenzen hinweg

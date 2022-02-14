@@ -1,7 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-// const SWITCH_LOGGING_LEVEL = "info";
-const SWITCH_LOGGING_LEVEL = "debug";
+const SWITCH_LOGGING_LEVEL = "info";
+// const SWITCH_LOGGING_LEVEL = "debug";
 
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = 1080;
@@ -60,14 +60,25 @@ let STROKE_SPEED;
 let STROKE_DISTORT;
 let STROKE_SIZE;
 let STROKE_COLOR;
+let STROKE_RESOLUTION;
 
-PADDING_X = 20;
-PADDING_Y = 20;
-DISTANCE_BETWEEN_LINES = 10;
-STROKE_SPEED = 1;
-STROKE_DISTORT = 0.1;
-STROKE_SIZE = 1;
+// PADDING_X = 20;
+// PADDING_Y = 20;
+// DISTANCE_BETWEEN_LINES = 10;
+// STROKE_SPEED = 1;
+// STROKE_DISTORT = 0.1;
+// STROKE_SIZE = 1;
+// STROKE_COLOR = 0;
+// STROKE_RESOLUTION = 5;
+
+PADDING_X = 10;
+PADDING_Y = 10;
+DISTANCE_BETWEEN_LINES = 25;
+STROKE_SPEED = 3;
+STROKE_DISTORT = 0.3;
+STROKE_SIZE = 3;
 STROKE_COLOR = 0;
+STROKE_RESOLUTION = 1;
 
 let lines;
 
@@ -176,6 +187,9 @@ function setup() {
   let points = create_coordinates_for_boxes();
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
 
+  // let points2 = create_coordinates_for_boxes();
+  // boxes2 = new Boxes(points2[0], points2[1], PAIRING_COUNT);
+
   // console.log(boxes);
 
   resize_canvas();
@@ -189,6 +203,15 @@ function draw() {
 
   boxes.show();
   boxes.show_lines();
+  boxes.check_boxes_complete();
+
+  if (boxes.boxes_completely_run == true) {
+    console.log("Feierabend");
+    noLoop();
+  }
+
+  // boxes2.show();
+  // boxes2.show_lines();
 
   for (var object of physical_objects) {
     push();
