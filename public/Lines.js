@@ -51,6 +51,7 @@ class Line {
         push();
         strokeWeight(STROKE_SIZE);
         stroke(STROKE_COLOR);
+        // stroke(distortColor(color(STROKE_COLOR)))
         noFill();
         beginShape();
         for (let i = 0; i < this.history.length; i++) {

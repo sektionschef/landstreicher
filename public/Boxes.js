@@ -232,7 +232,8 @@ class Boxes {
         for (let box_real of this.real_boxes) {
             // console.log(box_real.label);
             // fill(133);
-            fill(255);
+            // fill(255);
+            noFill();
             if (logging.getLevel() <= 1) {
                 strokeWeight(6);
                 stroke(51);

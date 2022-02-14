@@ -17,12 +17,14 @@
 * letzte schräge noch
 * vom winde verweht
 * shadow
+* remove matter
 * Auseinanderfallen - collapsen, randomly jeder einzelne - create body
 * in den linien löcher drin, rechtecke drin
 * vlt. ausdehnen der schraffune über boxgrenzen hinweg
 * resize incl. max size
 * mehrfach nachzeichnen den selben path
 * nochmal durchschraffieren
+* fxpreview()
 
 
 # Environment

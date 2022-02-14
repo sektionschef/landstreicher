@@ -53,6 +53,27 @@ PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
 logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
 // PAIRING_COUNT = 2;
 
+let palettes = [
+  {
+    name: "mellow melone",
+    stroke_color: "#141414",
+    background_color: "#F7AF9D"
+  },
+  {
+    name: "Lohengrin",
+    stroke_color: "#4281A4",
+    background_color: "#48A9A6"
+  },
+  {
+    name: "red wedding",
+    stroke_color: "#141414",
+    background_color: "#D91C32"
+  },
+
+]
+
+let chosen_palette = getRandomFromList(palettes);
+
 let PADDING_X;
 let PADDING_Y;
 let DISTANCE_BETWEEN_LINES;
@@ -61,6 +82,8 @@ let STROKE_DISTORT;
 let STROKE_SIZE;
 let STROKE_COLOR;
 let STROKE_RESOLUTION;
+let BACKGROUND_COLOR;
+let PALETTE_NAME;
 
 // PADDING_X = 20;
 // PADDING_Y = 20;
@@ -71,14 +94,39 @@ let STROKE_RESOLUTION;
 // STROKE_COLOR = 0;
 // STROKE_RESOLUTION = 5;
 
-PADDING_X = 10;
-PADDING_Y = 10;
-DISTANCE_BETWEEN_LINES = 25;
-STROKE_SPEED = 3;
-STROKE_DISTORT = 0.3;
-STROKE_SIZE = 3;
-STROKE_COLOR = 0;
+// cool, big stripes
+// PADDING_X = 10;
+// PADDING_Y = 10;
+// DISTANCE_BETWEEN_LINES = 25;
+// STROKE_SPEED = 3;
+// STROKE_DISTORT = 0.3;
+// STROKE_SIZE = 3;
+// STROKE_COLOR = 0;
+// STROKE_RESOLUTION = 1;
+
+PADDING_X = getRandomFromInterval(0, 20);
+PADDING_Y = getRandomFromInterval(0, 20);
+DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);
+STROKE_SPEED = getRandomFromInterval(1, 3);
+STROKE_DISTORT = getRandomFromInterval(0.1, 0.4);
+STROKE_SIZE = getRandomFromInterval(1, 5);
+// STROKE_COLOR = 0;
+PALETTE_NAME = chosen_palette.name;
+STROKE_COLOR = chosen_palette.stroke_color;
 STROKE_RESOLUTION = 1;
+BACKGROUND_COLOR = chosen_palette.background_color;
+
+
+logging.info("PADDING_X: " + PADDING_X);
+logging.info("PADDING_Y: " + PADDING_Y);
+logging.info("DISTANCE_BETWEEN_LINES: " + DISTANCE_BETWEEN_LINES);
+logging.info("STROKE_SPEED: " + STROKE_SPEED);
+logging.info("STROKE_DISTORT: " + STROKE_DISTORT);
+logging.info("STROKE_SIZE: " + STROKE_SIZE);
+logging.info("STROKE_COLOR: " + STROKE_COLOR);
+logging.info("STROKE_RESOLUTION: " + STROKE_RESOLUTION);
+logging.info("BACKGROUND_COLOR: " + BACKGROUND_COLOR);
+logging.info("PALETTE_NAME: " + PALETTE_NAME);
 
 let lines;
 
@@ -199,14 +247,14 @@ function setup() {
 function draw() {
 
   translate(-width / 2, -height / 2, 0);
-  background(255);
+  background(BACKGROUND_COLOR);
 
   boxes.show();
   boxes.show_lines();
   boxes.check_boxes_complete();
 
   if (boxes.boxes_completely_run == true) {
-    console.log("Feierabend");
+    logging.info("Fully rendered, stop the loop, brother!");
     noLoop();
   }
 
