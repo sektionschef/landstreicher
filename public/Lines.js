@@ -6,6 +6,7 @@ class Line {
         this.limit_x = limit_x;
         this.limit_y = limit_y;
         this.history = [];
+        this.line_color = distortColor(color(STROKE_COLOR));
 
         this.run_complete = false;
     }
@@ -50,8 +51,7 @@ class Line {
 
         push();
         strokeWeight(STROKE_SIZE);
-        stroke(STROKE_COLOR);
-        // stroke(distortColor(color(STROKE_COLOR)))
+        stroke(this.line_color);
         noFill();
         beginShape();
         for (let i = 0; i < this.history.length; i++) {
@@ -63,7 +63,7 @@ class Line {
         // brush
         push();
         noStroke();
-        fill(STROKE_COLOR);
+        fill(this.line_color);
         circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, STROKE_SIZE);
         pop()
 

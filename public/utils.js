@@ -59,9 +59,7 @@ function resize_canvas() {
     resizeCanvas(CANVAS_WIDTH * SCALING_FACTOR, CANVAS_HEIGHT * SCALING_FACTOR);
 }
 
-function create_coordinates_for_boxes() {
-    count_of_points_x = Math.floor(getRandomFromInterval(1, 5));
-    count_of_points_y = Math.floor(getRandomFromInterval(1, 5));
+function create_coordinates_for_boxes(count_of_points_x, count_of_points_y) {
 
     logging.info(count_of_points_x + " random points on x axis.");
     logging.info(count_of_points_y + " random points on y axis.");

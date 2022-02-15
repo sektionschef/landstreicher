@@ -48,32 +48,40 @@ let right_label
 
 logging.info("FXHASH: " + fxhash);
 
-let PAIRING_COUNT;
-PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
-logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
-// PAIRING_COUNT = 2;
 
 let palettes = [
+  // {
+  //   name: "mellow melone",
+  //   stroke_color: "#484848",
+  //   background_color: "#F7AF9D"
+  // },
+  // {
+  //   name: "Lohengrin",
+  //   stroke_color: "#4281A4",
+  //   background_color: "#48A9A6"
+  // },
+  // {
+  //   name: "horsereddish",
+  //   stroke_color: "#f25e44",
+  //   background_color: "#D91C32"
+  // },
+  // {
+  //   name: "nurnuri",
+  //   stroke_color: "#484848",
+  //   background_color: "#f25e44"
+  // },
   {
-    name: "mellow melone",
-    stroke_color: "#141414",
-    background_color: "#F7AF9D"
+    name: "sunny",
+    stroke_color: "#484848",
+    background_color: "#ffe75e"
   },
-  {
-    name: "Lohengrin",
-    stroke_color: "#4281A4",
-    background_color: "#48A9A6"
-  },
-  {
-    name: "red wedding",
-    stroke_color: "#141414",
-    background_color: "#D91C32"
-  },
-
 ]
 
 let chosen_palette = getRandomFromList(palettes);
 
+let COUNT_OF_POINTS_X;
+let COUNT_OF_POINTS_Y;
+let PAIRING_COUNT;
 let PADDING_X;
 let PADDING_Y;
 let DISTANCE_BETWEEN_LINES;
@@ -104,19 +112,30 @@ let PALETTE_NAME;
 // STROKE_COLOR = 0;
 // STROKE_RESOLUTION = 1;
 
-PADDING_X = getRandomFromInterval(0, 20);
-PADDING_Y = getRandomFromInterval(0, 20);
-DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);
+
+COUNT_OF_POINTS_X = Math.floor(getRandomFromInterval(2, 6));  // 1-5
+COUNT_OF_POINTS_Y = Math.floor(getRandomFromInterval(2, 6));  // 1-5
+
+PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
+
+// PAIRING_COUNT = 2;
+
+// PADDING_X = getRandomFromInterval(0, 20);
+// PADDING_Y = getRandomFromInterval(0, 20);
+PADDING_X = 0;
+PADDING_Y = 0;
 STROKE_SPEED = getRandomFromInterval(1, 3);
 STROKE_DISTORT = getRandomFromInterval(0.1, 0.4);
 STROKE_SIZE = getRandomFromInterval(1, 5);
-// STROKE_COLOR = 0;
+DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);
 PALETTE_NAME = chosen_palette.name;
+// STROKE_COLOR = 0;
 STROKE_COLOR = chosen_palette.stroke_color;
 STROKE_RESOLUTION = 1;
 BACKGROUND_COLOR = chosen_palette.background_color;
 
 
+logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
 logging.info("PADDING_X: " + PADDING_X);
 logging.info("PADDING_Y: " + PADDING_Y);
 logging.info("DISTANCE_BETWEEN_LINES: " + DISTANCE_BETWEEN_LINES);
@@ -232,11 +251,11 @@ function setup() {
   engine.world.gravity.y = VERTICAL_GRAVITY;
 
 
-  let points = create_coordinates_for_boxes();
+  let points = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
 
-  // let points2 = create_coordinates_for_boxes();
-  // boxes2 = new Boxes(points2[0], points2[1], PAIRING_COUNT);
+  let points2 = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
+  boxes2 = new Boxes(points2[0], points2[1], PAIRING_COUNT);
 
   // console.log(boxes);
 
@@ -258,8 +277,9 @@ function draw() {
     noLoop();
   }
 
-  // boxes2.show();
-  // boxes2.show_lines();
+  boxes2.show();
+  boxes2.show_lines();
+  boxes2.check_boxes_complete();
 
   for (var object of physical_objects) {
     push();
