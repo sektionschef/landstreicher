@@ -73,7 +73,7 @@ let palettes = [
   {
     name: "sunny",
     stroke_color: "#484848",
-    background_color: "#ffe75e"
+    background_color: "#ffe896"
   },
 ]
 

@@ -13,6 +13,21 @@
 * farbe im hintergrund
 
 ## Tasks
+
+gaps beheben
+Doppelte layer
+Rot. Gelb. Orange. Invert
+unterschiedlich stroke stärken für unt. boxen
+boxen mit mehreren schraffuren
+Hohere min wert für mehr boxen
+Abstand und Padding harmonisieren
+freie Flächen
+
+
+map distance between lines und stroke stärke: DISTANCE_BETWEEN_LINES ?
+map stroke stärke und distortion?
+
+
 * performance
 * letzte schräge noch
 * vom winde verweht

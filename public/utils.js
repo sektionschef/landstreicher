@@ -83,16 +83,20 @@ function create_coordinates_for_boxes(count_of_points_x, count_of_points_y) {
         return a - b;
     });
 
-    let minimum_distance_x = (width / 10)
+    let minimum_distance_x = (width / 3)
     for (var i = width_points.length - 1; i >= 0; i--) {
         if ((width_points[(i)] - width_points[i - 1]) < minimum_distance_x) {
-            width_points.splice(i, 1);
+            if (width_points[i] != width) {  // do not remove the width value
+                width_points.splice(i, 1);
+            }
         }
     }
-    let minimum_distance_y = (height / 10)
+    let minimum_distance_y = (height / 3)
     for (var i = height_points.length - 1; i >= 0; i--) {
         if ((height_points[(i)] - height_points[i - 1]) < minimum_distance_y) {
-            height_points.splice(i, 1);
+            if (height_points[i] != height) {
+                height_points.splice(i, 1);
+            }
         }
     }
 
@@ -101,3 +105,6 @@ function create_coordinates_for_boxes(count_of_points_x, count_of_points_y) {
 
     return [width_points, height_points]
 }
+
+
+// 1001 vs 1080
