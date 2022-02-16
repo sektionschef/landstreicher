@@ -104,6 +104,3 @@ function create_coordinates_for_boxes(count_of_points_x, count_of_points_y) {
 
     return [width_points, height_points]
 }
-
-
-// 1001 vs 1080

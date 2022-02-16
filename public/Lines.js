@@ -73,19 +73,11 @@ class Line {
         pop();
 
         // brush
-        push();
-        noStroke();
-        fill(this.line_color);
-        circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, STROKE_SIZE);
-        pop()
-
-
-        // if (
-        //     (this.history.length > 0) &
-        //     (this.history[this.history.length == )
-        // ) {
-        //     console.log("Stop");
-        // }
+        grid_canvas.push();
+        grid_canvas.noStroke();
+        grid_canvas.fill(this.line_color);
+        grid_canvas.circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, STROKE_SIZE);
+        grid_canvas.pop()
     }
 }
 
@@ -184,12 +176,14 @@ class Lines {
     }
 
     check_all_complete() {
-        this.all_lines_complete = true;
-        for (var line of this.bodies) {
-            if (line.run_complete == false) {
-                this.all_lines_complete = false;
+        // skip if already complete
+        if (this.all_lines_complete == false) {
+            this.all_lines_complete = true;
+            for (var line of this.bodies) {
+                if (line.run_complete == false) {
+                    this.all_lines_complete = false;
+                }
             }
         }
-
     }
 }

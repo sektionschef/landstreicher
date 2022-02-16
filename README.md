@@ -4,24 +4,22 @@
 ## Tasks
 
 * grain: https://github.com/matthias-jaeger-net/p5-toolkit/blob/main/src/hatches/modules/grain.ts 
+
+* performance offscreen buffer
+* eine box fertig -> buffer mit eigenem distorted color hintergrund.
+* fxpreview()
 * stroke size varyying
 * Rot. Gelb. Orange. Invert
-* (unterschiedlich stroke stärken für unt. boxen)
-* (boxen mit mehreren schraffuren)
-* (Abstand und Padding harmonisieren) - padding 0
-
 * map distance between lines und stroke stärke: DISTANCE_BETWEEN_LINES ?
+
+* unterschiedlich stroke stärken für unt. boxen
 * map stroke stärke und distortion?
 
-* performance
-* shadow
+* shadow - mehrfach nachzeichnen den selben path
 * remove matter
-* Auseinanderfallen - collapsen, randomly jeder einzelne - create body
+
 * in den linien löcher drin, rechtecke drin
-* (vlt. ausdehnen der schraffune über boxgrenzen hinweg)
 * resize incl. max size
-* mehrfach nachzeichnen den selben path
-* fxpreview()
 
 # Project
 

@@ -48,6 +48,9 @@ let combinations_y = 3
 let left_label
 let right_label
 
+let grid_canvas_1;
+let grid_canvas_2;
+
 logging.info("FXHASH: " + fxhash);
 
 
@@ -116,7 +119,7 @@ DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);
 PALETTE_NAME = chosen_palette.name;
 // STROKE_COLOR = 0;
 STROKE_COLOR = chosen_palette.stroke_color;
-STROKE_RESOLUTION = 2;
+STROKE_RESOLUTION = 1;
 BACKGROUND_COLOR = chosen_palette.background_color;
 
 
@@ -224,6 +227,10 @@ function setup() {
 
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
 
+  // layer without background for seeing traces
+  grid_canvas = createGraphics(width, height);
+  grid_canvas.clear();
+
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
   engine = Engine.create();
@@ -244,14 +251,18 @@ function setup() {
     boxes2 = new Boxes(points2[0], points2[1], PAIRING_COUNT);
   }
 
-  pg = createGraphics(width, height);
-  pg.loadPixels()
-  for (let x = 0; x < pg.width; x++) {
-    for (let y = 0; y < pg.height; y++) {
-      pg.set(x, y, distortColor(color(BACKGROUND_COLOR)));
+  background_buffer = createGraphics(width, height);
+  background_buffer.loadPixels()
+  for (let x = 0; x < background_buffer.width; x++) {
+    for (let y = 0; y < background_buffer.height; y++) {
+      background_buffer.set(x, y, distortColor(color(BACKGROUND_COLOR)));
     }
   }
-  pg.updatePixels()
+  background_buffer.updatePixels()
+
+  // background_buffer.strokeWeight(3);
+  // background_buffer.stroke(10);
+  // background_buffer.point(getRandomFromInterval(0, width), getRandomFromInterval(0, height));
 
   resize_canvas();
 }
@@ -260,8 +271,8 @@ function setup() {
 function draw() {
 
   translate(-width / 2, -height / 2, 0);
-  background(BACKGROUND_COLOR);
-  image(pg, 0, 0);
+  // background(BACKGROUND_COLOR); 
+  image(background_buffer, 0, 0);
 
   boxes.show();
   boxes.show_lines();
