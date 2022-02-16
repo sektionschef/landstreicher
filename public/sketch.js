@@ -124,8 +124,8 @@ PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
 
 // PADDING_X = getRandomFromInterval(0, 20);
 // PADDING_Y = getRandomFromInterval(0, 20);
-PADDING_X = 0;
-PADDING_Y = 0;
+PADDING_X = 20;
+PADDING_Y = 40;
 STROKE_SPEED = getRandomFromInterval(1, 3);
 STROKE_DISTORT = getRandomFromInterval(0.1, 0.4);
 STROKE_SIZE = getRandomFromInterval(1, 5);
