@@ -7,29 +7,6 @@ const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = CANVAS_WIDTH;
 let MINIMIMUM_DISTANCE = CANVAS_WIDTH / 20
 
-let gravity_counter = 0;
-
-let fps = 0;
-let default_debugging_text_size = 15;
-let debugging_physical_body_count = 0;
-
-// REWORK
-let timeScaleTarget = 1;
-
-// matter.js stuff
-var Engine = Matter.Engine;
-var World = Matter.World;
-var Body = Matter.Body;
-var Bodies = Matter.Bodies;
-var Composite = Matter.Composite;
-var Constraint = Matter.Constraint;
-var Mouse = Matter.Mouse;
-var MouseConstraint = Matter.MouseConstraint;
-
-var engine;
-var world;
-
-
 let SCALING_FACTOR = 1;
 let rescaling_width;
 let rescaling_height;
@@ -37,78 +14,67 @@ let rescaling_height;
 let width_points = [0];
 let height_points = [0];
 
-let physical_objects = [];
-
 let line_coords = { x: 30, y: 40 };
-
-// how many combinations to provide
-let combinations_x = 2
-let combinations_y = 3
-
-let left_label
-let right_label
 
 let line_canvas;
 
-logging.info("FXHASH: " + fxhash);
 
-
-let palettes = [
-  // {
-  //   name: "Mellow Melone",
-  //   stroke_color: "#484848",
-  //   background_color: "#F7AF9D"
-  // },
-  // {
-  //   name: "Lohengrin",
-  //   stroke_color: "#58b0e0",
-  //   background_color: "#358f8c"
-  // },
-  // {
-  //   name: "Horseradish",
-  //   stroke_color: "#f25e44",
-  //   background_color: "#D91C32"
-  // },
-  // {
-  //   name: "Nur-nuri",
-  //   stroke_color: "#484848",
-  //   background_color: "#f25e44"
-  // },
-  // {
-  //   name: "Sunny from the Swiss mountains",
-  //   stroke_color: "#666666",
-  //   background_color: "#ffe173"
-  // },
-  // {
-  //   name: "Würstelprater",
-  //   stroke_color: "#73A3BF",
-  //   background_color: "#A97A60"
-  // },
-  // {
-  //   name: "Majestix",
-  //   stroke_color: "#938FB8",
-  //   background_color: "#5A4EE4"
-  // },
-  // {
-  //   name: "Funky Funkelstein",
-  //   stroke_color: "#9070B5",
-  //   background_color: "#B1ABB8"
-  // },
-  // {
-  //   name: "Beef Burger",
-  //   stroke_color: "#376F7D",
-  //   background_color: "#7A2E1B"
-  // },
-  // {
-  //   name: "Helgoland",
-  //   stroke_color: "#376F7D",
-  //   background_color: "#E1E1E1"
-  // },
-  // {
-  //   name: "Flasche",
-  //   stroke_color: "#FF896B",
-  //   background_color: "#D5D5D5"
-  // },
+let PALETTES = [
+  {
+    name: "Mellow Melone",
+    stroke_color: "#484848",
+    background_color: "#F7AF9D"
+  },
+  {
+    name: "Lohengrin",
+    stroke_color: "#58b0e0",
+    background_color: "#358f8c"
+  },
+  {
+    name: "Horseradish",
+    stroke_color: "#f25e44",
+    background_color: "#D91C32"
+  },
+  {
+    name: "Nur-nuri",
+    stroke_color: "#484848",
+    background_color: "#f25e44"
+  },
+  {
+    name: "Sunny from the Swiss mountains",
+    stroke_color: "#666666",
+    background_color: "#ffe173"
+  },
+  {
+    name: "Würstelprater",
+    stroke_color: "#73A3BF",
+    background_color: "#A97A60"
+  },
+  {
+    name: "Majestix",
+    stroke_color: "#938FB8",
+    background_color: "#5A4EE4"
+  },
+  {
+    name: "Funky Funkelstein",
+    stroke_color: "#9070B5",
+    background_color: "#B1ABB8"
+  },
+  {
+    name: "Beef Burger",
+    stroke_color: "#376F7D",
+    background_color: "#7A2E1B"
+  },
+  {
+    name: "Helgoland",
+    stroke_color: "#376F7D",
+    background_color: "#E1E1E1"
+  },
+  {
+    name: "Flasche",
+    stroke_color: "#FF896B",
+    background_color: "#D5D5D5"
+  },
   {
     name: "Lachsforelle",
     stroke_color: "#FF896B",
@@ -117,7 +83,7 @@ let palettes = [
 
 ]
 
-let chosen_palette = getRandomFromList(palettes);
+let CHOSEN_PALETTE = getRandomFromList(PALETTES);
 
 let SECOND_RUN;
 let COUNT_OF_POINTS_X;
@@ -153,14 +119,14 @@ STROKE_SPEED = 1;
 STROKE_DISTORT = getRandomFromInterval(0.1, 0.4);
 STROKE_SIZE = getRandomFromInterval(1, 5);
 DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);
-PALETTE_NAME = chosen_palette.name;
+PALETTE_NAME = CHOSEN_PALETTE.name;
 // STROKE_COLOR = 0;
-STROKE_COLOR = chosen_palette.stroke_color;
+STROKE_COLOR = CHOSEN_PALETTE.stroke_color;
 STROKE_RESOLUTION = 1;
-BACKGROUND_COLOR = chosen_palette.background_color;
+BACKGROUND_COLOR = CHOSEN_PALETTE.background_color;
 BACKGROUND_GRAIN = getRandomFromInterval(5, 20);
 
-
+logging.info("FXHASH: " + fxhash);
 logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
 logging.info("PADDING_X: " + PADDING_X);
 logging.info("PADDING_Y: " + PADDING_Y);
@@ -258,28 +224,16 @@ let lines;
 
 function preload() {
   font = loadFont('SourceSansPro-Regular.otf');
-
 }
 
 function setup() {
+  logging.setLevel(SWITCH_LOGGING_LEVEL);
 
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
 
   // layer without background for seeing traces
   line_canvas = createGraphics(width, height);
   line_canvas.clear();
-
-  logging.setLevel(SWITCH_LOGGING_LEVEL);
-
-  engine = Engine.create();
-  world = engine.world;
-
-  const VERTICAL_GRAVITY = 1;
-  // const VERTICAL_GRAVITY = getRandomFromInterval(0.05, 0.5);
-
-  Matter.Runner.run(engine)
-  engine.world.gravity.y = VERTICAL_GRAVITY;
-
 
   let points = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
@@ -347,42 +301,5 @@ function draw() {
   }
 
   image(line_canvas, 0, 0);
-
-
-  for (var object of physical_objects) {
-    push();
-    strokeWeight(1);
-    fill(255, 0, 0, 50);
-    beginShape();
-    for (var i = 0; i < object.vertices.length; i++) {
-      vertex(object.vertices[i].x, object.vertices[i].y);
-    }
-    endShape(CLOSE);
-    pop();
-  }
-
-  Engine.update(engine);
 }
 
-
-function keyPressed() {
-  if (keyCode === LEFT_ARROW) {
-    console.log("left arrow pressed");
-
-    // for (box of boxes.real_boxes)
-    console.log(boxes.real_boxes[0].lines.bodies[0].history);
-
-    for (var line of boxes.real_boxes[0].lines.bodies) {
-
-      new_object = Body.create({
-        // position: { x: boxes.real_boxes[0].lines.bodies[0].history[0].x, y: boxes.real_boxes[0].lines.bodies[0].history[0].y },
-        position: { x: line.history[0].x, y: line.history[0].y },
-        vertices: line.history, //, ...options
-      });
-      physical_objects.push(new_object)
-      World.add(world, new_object);
-    }
-
-
-  }
-}

@@ -3,12 +3,9 @@
 
 ## Tasks
 
-* grain: https://github.com/matthias-jaeger-net/p5-toolkit/blob/main/src/hatches/modules/grain.ts 
-
 * stroke size varyying
-* Rot. Gelb. Orange. Invert
 * map distance between lines und stroke stärke: DISTANCE_BETWEEN_LINES ?
-
+* create features
 * unterschiedlich stroke stärken für unt. boxen
 * map stroke stärke und distortion?
 
