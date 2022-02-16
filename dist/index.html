@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Landstreicher</title><meta name="description" content="Painting created with p5.js and matter.js."><meta name="author" content="Stefan Schwaha"><meta property="og:title" content="Generative painting"><meta property="og:type" content="website"><meta property="og:url" content="https://digitalitility.com"><meta property="og:description" content="Painting created with p5.js and matter.js."><meta property="og:image" content="thumbnail.gif"><link rel="icon" href="favicon.ico"><script id="fxhash-snippet">//---- do not edit the following code (you can indent as you wish)
     let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
     var fxhash = "oo" + Array(49).fill(0).map(_ => alphabet[(Math.random() * alphabet.length) | 0]).join('')
-    // var fxhash = "ooxWKN2wuQiC9R6s9jk1YiPpYJdCmM3rANnymr8r5ZnLa7G4HU5"
+    // var fxhash = "ootKPQ9429CYxmwfEbrh9X5CJwuUpzaSX9qzdUawZRuVc87uFVv"
     let b58dec = str => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0)
     let fxhashTrunc = fxhash.slice(2)
     let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}", 'g')
@@ -26,4 +26,4 @@
     function fxpreview() {
       console.log("fxhash: TRIGGER PREVIEW")
     }
-      //---- /do not edit the following code</script><script src="p5.min.js"></script><script src="matter.min.js"></script><script src="loglevel.min.js"></script><script>var logging = log.noConflict();</script><script src="decomp.min.js" ) }}></script><script src="Boxes.js" ) }}></script><script src="Lines.js" ) }}></script><script src="utils.js" ) }}></script><script src="sketch.js" ) }}></script><link rel="stylesheet" href="styles.css"></head><body><div id="p5_loading" class="loadingclass"></div><div class="container"><div id="canvasHolder"></div></div><script defer="defer" src="./bundle.js"></script></body></html>
+      //---- /do not edit the following code</script><script src="p5.min.js"></script><script src="loglevel.min.js"></script><script>var logging = log.noConflict();</script><script src="Boxes.js" ) }}></script><script src="Lines.js" ) }}></script><script src="utils.js" ) }}></script><script src="sketch.js" ) }}></script><link rel="stylesheet" href="styles.css"></head><body><div id="p5_loading" class="loadingclass"></div><div class="container"><div id="canvasHolder"></div></div><script defer="defer" src="./bundle.js"></script></body></html>

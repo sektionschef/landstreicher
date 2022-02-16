@@ -18,6 +18,8 @@ let line_coords = { x: 30, y: 40 };
 
 let line_canvas;
 
+let lines;
+
 
 let PALETTES = [
   {
@@ -139,21 +141,6 @@ logging.info("STROKE_RESOLUTION: " + STROKE_RESOLUTION);
 logging.info("BACKGROUND_COLOR: " + BACKGROUND_COLOR);
 logging.info("PALETTE_NAME: " + PALETTE_NAME);
 
-let lines;
-
-// // for FEATURE creation
-// chosen_palette = getRandomFromList(PALETTE);
-// PALETTE = chosen_palette.values;
-// PALETTE_NAME = chosen_palette.name;
-
-// const NUMBER_PARTICLES = Math.floor(getRandomFromInterval(40, 130));  // 70
-
-// const EXPLOSION_INTERVAL = getRandomFromInterval(4000, 8000);  // 8000
-// const FREEZE_DURATION = getRandomFromInterval(3000, 9000);  // 5000
-// const EXPLOSION_TO_FREEZE = getRandomFromInterval(20, 50);  // 30;
-
-// const EXPLOSION_FORCE = getRandomFromInterval(0.1, 1);  // 0.5
-// const GRAVITY_SPEED = getRandomFromInterval(0.1, 1); // 0.5
 
 
 // if (NUMBER_PARTICLES < 70) {

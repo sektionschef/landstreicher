@@ -6,14 +6,12 @@
 * stroke size varyying
 * map distance between lines und stroke stärke: DISTANCE_BETWEEN_LINES ?
 * create features
+* resize incl. max size
+
+* zentrieren anhand von stroke stärke und anzahl der strokes (wie viele gehen sich aus)
 * unterschiedlich stroke stärken für unt. boxen
 * map stroke stärke und distortion?
-
 * shadow - mehrfach nachzeichnen den selben path
-* remove matter
-
-* in den linien löcher drin, rechtecke drin
-* resize incl. max size
 
 # Project
 
@@ -21,6 +19,7 @@ Couple of strokes wandering through the landscapes.
 
 space is radomly cut in segments and those are randomly paired.
 
+100% generative, without pngs.
 repo: 
 
 
