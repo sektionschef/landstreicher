@@ -1,25 +1,10 @@
 # Landstreicher
 
-1. schöne strokes
-2. raster, grid auswahl
-3. brushes? - ausgefranst
-
-
-## Params
-* Speed
-* Chirurg bis drunk
-* Abstand
-* density und restitution als params
-* farbe im hintergrund
 
 ## Tasks
 
-* paddingx = paddingy
-* grain
+* grain: https://github.com/matthias-jaeger-net/p5-toolkit/blob/main/src/hatches/modules/grain.ts 
 * stroke size varyying
-
-* freie Flächen
-* Doppelte layer
 * Rot. Gelb. Orange. Invert
 * (unterschiedlich stroke stärken für unt. boxen)
 * (boxen mit mehreren schraffuren)
@@ -29,8 +14,6 @@
 * map stroke stärke und distortion?
 
 * performance
-* letzte schräge noch
-* vom winde verweht
 * shadow
 * remove matter
 * Auseinanderfallen - collapsen, randomly jeder einzelne - create body

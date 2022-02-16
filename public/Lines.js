@@ -102,8 +102,7 @@ class Lines {
         this.bodies = [];
         this.all_lines_complete = false;
 
-        // let chosen_axis = getRandomFromList(["x", "y", "xy", "yx"])
-        let chosen_axis = "y";
+        let chosen_axis = getRandomFromList(["x", "y", "xy", "yx", "blank"])
         logging.debug(chosen_axis + " axis randomly chosen.");
 
         if (chosen_axis == "x") {
@@ -174,16 +173,7 @@ class Lines {
                 )
                 );
             }
-            // this.count_lines = ((this.y_stop - this.y_start) - 2 * this.padding_y) / this.distance_between_lines;
-            // // skip first one
-            // for (let i = 1; i < this.count_lines; i++) {
-            //     this.bodies.push(new Line(
-            //         chosen_axis,
-            //         (this.x_start + this.padding_x),
-            //         (this.y_start + this.padding_y + this.distance_between_lines * i),
-            //         this.x_stop - this.padding_x,
-            //         (this.y_stop - this.padding_x)));
-            // }
+        } else if (chosen_axis == "blank") {
         }
     }
 

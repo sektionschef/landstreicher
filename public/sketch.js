@@ -1,7 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-// const SWITCH_LOGGING_LEVEL = "info";
-const SWITCH_LOGGING_LEVEL = "debug";
+const SWITCH_LOGGING_LEVEL = "info";
+// const SWITCH_LOGGING_LEVEL = "debug";
 
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = CANVAS_WIDTH;
@@ -52,26 +52,26 @@ logging.info("FXHASH: " + fxhash);
 
 
 let palettes = [
-  // {
-  //   name: "mellow melone",
-  //   stroke_color: "#484848",
-  //   background_color: "#F7AF9D"
-  // },
-  // {
-  //   name: "Lohengrin",
-  //   stroke_color: "#4281A4",
-  //   background_color: "#48A9A6"
-  // },
-  // {
-  //   name: "horsereddish",
-  //   stroke_color: "#f25e44",
-  //   background_color: "#D91C32"
-  // },
-  // {
-  //   name: "nurnuri",
-  //   stroke_color: "#484848",
-  //   background_color: "#f25e44"
-  // },
+  {
+    name: "mellow melone",
+    stroke_color: "#484848",
+    background_color: "#F7AF9D"
+  },
+  {
+    name: "Lohengrin",
+    stroke_color: "#4281A4",
+    background_color: "#48A9A6"
+  },
+  {
+    name: "horsereddish",
+    stroke_color: "#f25e44",
+    background_color: "#D91C32"
+  },
+  {
+    name: "nurnuri",
+    stroke_color: "#484848",
+    background_color: "#f25e44"
+  },
   {
     name: "sunny",
     stroke_color: "#484848",
@@ -81,6 +81,7 @@ let palettes = [
 
 let chosen_palette = getRandomFromList(palettes);
 
+let SECOND_RUN;
 let COUNT_OF_POINTS_X;
 let COUNT_OF_POINTS_Y;
 let PAIRING_COUNT;
@@ -95,24 +96,7 @@ let STROKE_RESOLUTION;
 let BACKGROUND_COLOR;
 let PALETTE_NAME;
 
-// PADDING_X = 20;
-// PADDING_Y = 20;
-// DISTANCE_BETWEEN_LINES = 10;
-// STROKE_SPEED = 1;
-// STROKE_DISTORT = 0.1;
-// STROKE_SIZE = 1;
-// STROKE_COLOR = 0;
-// STROKE_RESOLUTION = 5;
-
-// cool, big stripes
-// PADDING_X = 10;
-// PADDING_Y = 10;
-// DISTANCE_BETWEEN_LINES = 25;
-// STROKE_SPEED = 3;
-// STROKE_DISTORT = 0.3;
-// STROKE_SIZE = 3;
-// STROKE_COLOR = 0;
-// STROKE_RESOLUTION = 1;
+SECOND_RUN = true;
 
 
 COUNT_OF_POINTS_X = Math.floor(getRandomFromInterval(1, 5));  // 1-5
@@ -120,12 +104,11 @@ COUNT_OF_POINTS_Y = Math.floor(getRandomFromInterval(1, 5));  // 1-5
 
 PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
 
-// PAIRING_COUNT = 2;
 
 // PADDING_X = getRandomFromInterval(0, 20);
 // PADDING_Y = getRandomFromInterval(0, 20);
-PADDING_X = 20;
-PADDING_Y = 40;
+PADDING_X = 0;
+PADDING_Y = 0;
 STROKE_SPEED = getRandomFromInterval(1, 3);
 STROKE_DISTORT = getRandomFromInterval(0.1, 0.4);
 STROKE_SIZE = getRandomFromInterval(1, 5);
@@ -133,7 +116,7 @@ DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);
 PALETTE_NAME = chosen_palette.name;
 // STROKE_COLOR = 0;
 STROKE_COLOR = chosen_palette.stroke_color;
-STROKE_RESOLUTION = 1;
+STROKE_RESOLUTION = 2;
 BACKGROUND_COLOR = chosen_palette.background_color;
 
 
@@ -256,10 +239,19 @@ function setup() {
   let points = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
 
-  // let points2 = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
-  // boxes2 = new Boxes(points2[0], points2[1], PAIRING_COUNT);
+  if (SECOND_RUN == true) {
+    let points2 = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
+    boxes2 = new Boxes(points2[0], points2[1], PAIRING_COUNT);
+  }
 
-  // console.log(boxes);
+  pg = createGraphics(width, height);
+  pg.loadPixels()
+  for (let x = 0; x < pg.width; x++) {
+    for (let y = 0; y < pg.height; y++) {
+      pg.set(x, y, distortColor(color(BACKGROUND_COLOR)));
+    }
+  }
+  pg.updatePixels()
 
   resize_canvas();
 }
@@ -269,20 +261,31 @@ function draw() {
 
   translate(-width / 2, -height / 2, 0);
   background(BACKGROUND_COLOR);
+  image(pg, 0, 0);
 
   boxes.show();
   boxes.show_lines();
   boxes.check_boxes_complete();
 
-  if (boxes.boxes_completely_run == true) {
-    logging.info("Fully rendered, stop the loop, brother!");
-    noLoop();
+  if (SECOND_RUN == true) {
+    boxes2.show();
+    boxes2.show_lines();
+    boxes2.check_boxes_complete();
   }
 
-  // boxes2.show();
-  // boxes2.show_lines();
-  // boxes2.check_boxes_complete();
-  // END LOOP after second
+
+  if (SECOND_RUN == true) {
+    if (boxes.boxes_completely_run == true && boxes2.boxes_completely_run == true) {
+      logging.info("Fully rendered, stop the loop, brother!");
+      noLoop();
+    }
+  } else {
+    if (boxes.boxes_completely_run == true) {
+      logging.info("Fully rendered, stop the loop, brother!");
+      noLoop();
+    }
+  }
+
 
   for (var object of physical_objects) {
     push();
