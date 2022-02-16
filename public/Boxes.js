@@ -235,16 +235,16 @@ class Boxes {
             // fill(255);
             noFill();
             if (logging.getLevel() <= 1) {
-                strokeWeight(6);
+                strokeWeight(3);
                 stroke(51);
             } else {
                 noStroke();
             }
-            rect(box_real.a.x * SCALING_FACTOR, box_real.a.y * SCALING_FACTOR, box_real.c.x * SCALING_FACTOR, box_real.c.y * SCALING_FACTOR);
-            fill(0)
-            center_x = (box_real.b.x - box_real.a.x) / 2 * SCALING_FACTOR
-            center_y = (box_real.d.y - box_real.a.y) / 2 * SCALING_FACTOR
             if (logging.getLevel() <= 1) {
+                rect(box_real.a.x * SCALING_FACTOR, box_real.a.y * SCALING_FACTOR, box_real.c.x * SCALING_FACTOR, box_real.c.y * SCALING_FACTOR);
+                fill(0)
+                center_x = (box_real.b.x - box_real.a.x) / 2 * SCALING_FACTOR
+                center_y = (box_real.d.y - box_real.a.y) / 2 * SCALING_FACTOR
                 text(box_real.label, (box_real.a.x + center_x) * SCALING_FACTOR, (box_real.a.y + center_y) * SCALING_FACTOR);
             }
         }

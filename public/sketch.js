@@ -48,8 +48,7 @@ let combinations_y = 3
 let left_label
 let right_label
 
-let grid_canvas_1;
-let grid_canvas_2;
+let line_canvas;
 
 logging.info("FXHASH: " + fxhash);
 
@@ -112,7 +111,8 @@ PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
 // PADDING_Y = getRandomFromInterval(0, 20);
 PADDING_X = 0;
 PADDING_Y = 0;
-STROKE_SPEED = getRandomFromInterval(1, 3);
+// STROKE_SPEED = getRandomFromInterval(1, 3);
+STROKE_SPEED = 1;
 STROKE_DISTORT = getRandomFromInterval(0.1, 0.4);
 STROKE_SIZE = getRandomFromInterval(1, 5);
 DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);
@@ -228,8 +228,8 @@ function setup() {
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
 
   // layer without background for seeing traces
-  grid_canvas = createGraphics(width, height);
-  grid_canvas.clear();
+  line_canvas = createGraphics(width, height);
+  line_canvas.clear();
 
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
@@ -296,6 +296,8 @@ function draw() {
       noLoop();
     }
   }
+
+  image(line_canvas, 0, 0);
 
 
   for (var object of physical_objects) {

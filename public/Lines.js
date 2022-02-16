@@ -17,9 +17,9 @@ class Line {
             if (this.x <= this.limit_x) {
                 this.x += STROKE_SPEED;
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                if (frameCount % STROKE_RESOLUTION == 0) {
-                    this.history.push(createVector(this.x, this.y));
-                }
+                // if (frameCount % STROKE_RESOLUTION == 0) {
+                //     this.history.push(createVector(this.x, this.y));
+                // }
             } else {
                 this.run_complete = true;
             }
@@ -27,9 +27,9 @@ class Line {
             if (this.y <= this.limit_y) {
                 this.y += STROKE_SPEED;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                if (frameCount % STROKE_RESOLUTION == 0) {
-                    this.history.push(createVector(this.x, this.y));
-                }
+                // if (frameCount % STROKE_RESOLUTION == 0) {
+                //     this.history.push(createVector(this.x, this.y));
+                // }
             } else {
                 this.run_complete = true;
             }
@@ -39,9 +39,9 @@ class Line {
                 this.y += STROKE_SPEED;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                if (frameCount % STROKE_RESOLUTION == 0) {
-                    this.history.push(createVector(this.x, this.y));
-                }
+                // if (frameCount % STROKE_RESOLUTION == 0) {
+                //     this.history.push(createVector(this.x, this.y));
+                // }
             } else {
                 this.run_complete = true;
             }
@@ -51,33 +51,32 @@ class Line {
                 this.y -= STROKE_SPEED;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                if (frameCount % STROKE_RESOLUTION == 0) {
-                    this.history.push(createVector(this.x, this.y));
-                }
+                // if (frameCount % STROKE_RESOLUTION == 0) {
+                //     this.history.push(createVector(this.x, this.y));
+                // }
             } else {
                 this.run_complete = true;
             }
         }
 
-        // console.log(this.history.length)
-
-        push();
-        strokeWeight(STROKE_SIZE);
-        stroke(this.line_color);
-        noFill();
-        beginShape();
-        for (let i = 0; i < this.history.length; i++) {
-            vertex(this.history[i].x * SCALING_FACTOR, this.history[i].y * SCALING_FACTOR);
-        }
-        endShape();
-        pop();
+        // traces with history
+        // push();
+        // strokeWeight(STROKE_SIZE);
+        // stroke(this.line_color);
+        // noFill();
+        // beginShape();
+        // for (let i = 0; i < this.history.length; i++) {
+        //     vertex(this.history[i].x * SCALING_FACTOR, this.history[i].y * SCALING_FACTOR);
+        // }
+        // endShape();
+        // pop();
 
         // brush
-        grid_canvas.push();
-        grid_canvas.noStroke();
-        grid_canvas.fill(this.line_color);
-        grid_canvas.circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, STROKE_SIZE);
-        grid_canvas.pop()
+        line_canvas.push();
+        line_canvas.noStroke();
+        line_canvas.fill(this.line_color);
+        line_canvas.circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, STROKE_SIZE);
+        line_canvas.pop()
     }
 }
 
