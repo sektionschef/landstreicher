@@ -22,17 +22,7 @@
     //---- do not edit the following code (you can indent as you wish)
     let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
     var fxhash = "oo" + Array(49).fill(0).map(_ => alphabet[(Math.random() * alphabet.length) | 0]).join('')
-    // var fxhash = "ooyvbcc8249Wcs2MUFGCdsrRkq4As74fWTeD9MBsag7MSGWzcGb" // vertical gap
-    // var fxhash = "ooYjg9PA5gWp8WwxARqSrJhGrKHpBrhE7sb2N181HMEQyB26KWm" // vertical gap
-    // var fxhash = "ooRJusUbTXPw6myyFKUctwjXqHYLPs8YDhfRmqPvvRgsU6ZvSqU" // gap
-    // var fxhash = "oooRLkymjQaxttimv7sAXXFGNfvGimePzfagemoEnq13pP6NNLd" // vertical gap
-    var fxhash = "oo7azXs85QFBv65XAhxK6G8mxbNt8LknxXvtNZpJh7GGA6Axe97"  // gap
-    // var fxhash = "oo7wYeQTMbLX9adF2kWuiHvQtcqoLdFSBEaMq46EKGUY8najR7Z"  // 1 pair, 4 boxes
-    // var fxhash = "oo1v4c1HSWhQi258ovyS5VQYi99QetdS5guyfGwMnAZHFWkuZQh"  // normal
-    // var fxhash = "oosvnugLwhv9giJ2qLpC7zYzh37wMsB9w9PH79Z1sdPaTMarFBH" // shared boxes between x and y
-    // var fxhash = "oo8gWF66mKw3JpcEUkBEerQreznEJvdPoyspHjahBJnvNByHoZV" // white spots - solved
-    // var fxhash = "ooq5Bvx8dNB8BhfGruAYLWCdLuXgknL5SV8BrZMPh8N2avrbbTV"  // white spots - solved
-    // var fxhash = "oo4xQpTNKUUS2uEKCnsBJpg95DpDHTxZbARYMJPgPKyrg1Ho7fD" // error - solved
+    // var fxhash = "ooxWKN2wuQiC9R6s9jk1YiPpYJdCmM3rANnymr8r5ZnLa7G4HU5"
     let b58dec = str => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0)
     let fxhashTrunc = fxhash.slice(2)
     let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}", 'g')

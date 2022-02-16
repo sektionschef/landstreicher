@@ -1,10 +1,11 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-const SWITCH_LOGGING_LEVEL = "info";
-// const SWITCH_LOGGING_LEVEL = "debug";
+// const SWITCH_LOGGING_LEVEL = "info";
+const SWITCH_LOGGING_LEVEL = "debug";
 
 const CANVAS_WIDTH = 1080;
-const CANVAS_HEIGHT = 1080;
+const CANVAS_HEIGHT = CANVAS_WIDTH;
+let MINIMIMUM_DISTANCE = CANVAS_WIDTH / 20
 
 let gravity_counter = 0;
 
@@ -27,6 +28,7 @@ var MouseConstraint = Matter.MouseConstraint;
 
 var engine;
 var world;
+
 
 let SCALING_FACTOR = 1;
 let rescaling_width;
@@ -73,7 +75,7 @@ let palettes = [
   {
     name: "sunny",
     stroke_color: "#484848",
-    background_color: "#ffe896"
+    background_color: "#ffe173"
   },
 ]
 
@@ -113,8 +115,8 @@ let PALETTE_NAME;
 // STROKE_RESOLUTION = 1;
 
 
-COUNT_OF_POINTS_X = Math.floor(getRandomFromInterval(2, 6));  // 1-5
-COUNT_OF_POINTS_Y = Math.floor(getRandomFromInterval(2, 6));  // 1-5
+COUNT_OF_POINTS_X = Math.floor(getRandomFromInterval(1, 5));  // 1-5
+COUNT_OF_POINTS_Y = Math.floor(getRandomFromInterval(1, 5));  // 1-5
 
 PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
 
@@ -254,8 +256,8 @@ function setup() {
   let points = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
 
-  let points2 = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
-  boxes2 = new Boxes(points2[0], points2[1], PAIRING_COUNT);
+  // let points2 = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
+  // boxes2 = new Boxes(points2[0], points2[1], PAIRING_COUNT);
 
   // console.log(boxes);
 
@@ -277,9 +279,10 @@ function draw() {
     noLoop();
   }
 
-  boxes2.show();
-  boxes2.show_lines();
-  boxes2.check_boxes_complete();
+  // boxes2.show();
+  // boxes2.show_lines();
+  // boxes2.check_boxes_complete();
+  // END LOOP after second
 
   for (var object of physical_objects) {
     push();

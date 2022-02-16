@@ -14,19 +14,19 @@
 
 ## Tasks
 
-gaps beheben
-Doppelte layer
-Rot. Gelb. Orange. Invert
-unterschiedlich stroke stärken für unt. boxen
-boxen mit mehreren schraffuren
-Hohere min wert für mehr boxen
-Abstand und Padding harmonisieren
-freie Flächen
+* paddingx = paddingy
+* grain
+* stroke size varyying
 
+* freie Flächen
+* Doppelte layer
+* Rot. Gelb. Orange. Invert
+* (unterschiedlich stroke stärken für unt. boxen)
+* (boxen mit mehreren schraffuren)
+* (Abstand und Padding harmonisieren) - padding 0
 
-map distance between lines und stroke stärke: DISTANCE_BETWEEN_LINES ?
-map stroke stärke und distortion?
-
+* map distance between lines und stroke stärke: DISTANCE_BETWEEN_LINES ?
+* map stroke stärke und distortion?
 
 * performance
 * letzte schräge noch
@@ -35,11 +35,18 @@ map stroke stärke und distortion?
 * remove matter
 * Auseinanderfallen - collapsen, randomly jeder einzelne - create body
 * in den linien löcher drin, rechtecke drin
-* vlt. ausdehnen der schraffune über boxgrenzen hinweg
+* (vlt. ausdehnen der schraffune über boxgrenzen hinweg)
 * resize incl. max size
 * mehrfach nachzeichnen den selben path
-* nochmal durchschraffieren
 * fxpreview()
+
+# Project
+
+Couple of strokes wandering through the landscapes. 
+
+space is radomly cut in segments and those are randomly paired.
+
+repo: 
 
 
 # Environment

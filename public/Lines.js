@@ -45,6 +45,18 @@ class Line {
             } else {
                 this.run_complete = true;
             }
+        } else if (this.orientation == "yx") {
+            if (this.x <= this.limit_x && this.y >= this.limit_y) {
+                this.x += STROKE_SPEED;
+                this.y -= STROKE_SPEED;
+                this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                if (frameCount % STROKE_RESOLUTION == 0) {
+                    this.history.push(createVector(this.x, this.y));
+                }
+            } else {
+                this.run_complete = true;
+            }
         }
 
         // console.log(this.history.length)
@@ -90,7 +102,8 @@ class Lines {
         this.bodies = [];
         this.all_lines_complete = false;
 
-        let chosen_axis = getRandomFromList(["x", "y", "xy"])
+        // let chosen_axis = getRandomFromList(["x", "y", "xy", "yx"])
+        let chosen_axis = "yx";
         logging.debug(chosen_axis + " axis randomly chosen.");
 
         if (chosen_axis == "x") {
@@ -112,7 +125,7 @@ class Lines {
                     chosen_axis,
                     (this.x_start + this.padding_x + this.distance_between_lines * i),
                     (this.y_start + this.padding_y),
-                    this.x_stop,
+                    this.x_stop,  // REALLY no padding?
                     (this.y_stop - this.padding_x)));
             }
         } else if (chosen_axis == "xy") {
@@ -136,6 +149,42 @@ class Lines {
                     this.x_stop - this.padding_x,
                     (this.y_stop - this.padding_x)));
             }
+        } else if (chosen_axis == "yx") {
+            this.count_lines = ((this.x_stop - this.x_start) - 2 * this.padding_x) / this.distance_between_lines;
+
+            for (let i = 0; i < this.count_lines; i++) {
+                this.bodies.push(new Line(
+                    chosen_axis,
+                    this.x_start + this.padding_x + this.distance_between_lines * i,
+                    (this.y_stop - this.padding_y),
+                    (this.x_stop - this.padding_x),
+                    (this.y_start)
+                )
+                );
+            }
+            this.count_lines = abs(((this.y_start - this.y_stop) - 2 * this.padding_y) / this.distance_between_lines);
+            console.log(this.count_lines);
+
+            for (let i = 1; i < this.count_lines; i++) {
+                this.bodies.push(new Line(
+                    chosen_axis,
+                    this.x_start + this.padding_x,
+                    (this.y_stop - this.padding_y - this.distance_between_lines * i),
+                    (this.x_stop - this.padding_x),
+                    (this.y_start)
+                )
+                );
+            }
+            // this.count_lines = ((this.y_stop - this.y_start) - 2 * this.padding_y) / this.distance_between_lines;
+            // // skip first one
+            // for (let i = 1; i < this.count_lines; i++) {
+            //     this.bodies.push(new Line(
+            //         chosen_axis,
+            //         (this.x_start + this.padding_x),
+            //         (this.y_start + this.padding_y + this.distance_between_lines * i),
+            //         this.x_stop - this.padding_x,
+            //         (this.y_stop - this.padding_x)));
+            // }
         }
     }
 
