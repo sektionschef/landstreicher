@@ -5,9 +5,6 @@
 
 * grain: https://github.com/matthias-jaeger-net/p5-toolkit/blob/main/src/hatches/modules/grain.ts 
 
-* performance offscreen buffer
-* eine box fertig -> buffer mit eigenem distorted color hintergrund.
-* fxpreview()
 * stroke size varyying
 * Rot. Gelb. Orange. Invert
 * map distance between lines und stroke stärke: DISTANCE_BETWEEN_LINES ?
