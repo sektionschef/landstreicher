@@ -14,8 +14,6 @@ let rescaling_height;
 let width_points = [0];
 let height_points = [0];
 
-let line_coords = { x: 30, y: 40 };
-
 let line_canvas;
 
 let lines;
@@ -218,10 +216,6 @@ function setup() {
 
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
 
-  // layer without background for seeing traces
-  line_canvas = createGraphics(width, height);
-  line_canvas.clear();
-
   let points = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
 
@@ -230,7 +224,7 @@ function setup() {
     boxes2 = new Boxes(points2[0], points2[1], PAIRING_COUNT);
   }
 
-  background_buffer = createGraphics(width, height);
+  background_buffer = createGraphics(CANVAS_WIDTH, CANVAS_HEIGHT);
   background_buffer.loadPixels()
   for (let x = 0; x < background_buffer.width; x++) {
     for (let y = 0; y < background_buffer.height; y++) {
@@ -252,6 +246,10 @@ function setup() {
   //   background_buffer.point(x, y);
   // }
 
+  // layer without background for seeing traces
+  line_canvas = createGraphics(CANVAS_WIDTH, CANVAS_HEIGHT);
+  line_canvas.clear();
+
   resize_canvas();
 }
 
@@ -259,8 +257,9 @@ function setup() {
 function draw() {
 
   translate(-width / 2, -height / 2, 0);
-  // background(BACKGROUND_COLOR); 
-  image(background_buffer, 0, 0);
+  // background(BACKGROUND_COLOR);
+  image(background_buffer, 0, 0, background_buffer.width * SCALING_FACTOR, background_buffer.height * SCALING_FACTOR);
+  image(line_canvas, 0, 0, CANVAS_WIDTH * SCALING_FACTOR, CANVAS_HEIGHT * SCALING_FACTOR);
 
   boxes.show();
   boxes.show_lines();
@@ -287,6 +286,5 @@ function draw() {
     }
   }
 
-  image(line_canvas, 0, 0);
 }
 

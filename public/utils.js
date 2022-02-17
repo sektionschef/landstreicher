@@ -46,17 +46,10 @@ function resize_canvas() {
 
     // particles_physical.kill_all();
 
-    // reboot - since scaling in physical world is only possible relative to the preceding body.
-    // impediment_strokes.kill_all();
-    // impediment_strokes.create_all();
-    // impediment_strokes.rescale();
-
-    // impediment_walls.kill_all();
-    // impediment_walls.create_all();
-    // impediment_walls.rescale();
-
-    // origins.kill_all();
-    // origins.create_all();
+    // resize p5 object
+    var line_canvas_resized = createGraphics(CANVAS_WIDTH * SCALING_FACTOR, CANVAS_HEIGHT * SCALING_FACTOR);
+    line_canvas_resized.image(line_canvas, 0, 0, line_canvas_resized.width, line_canvas_resized.height);
+    line_canvas = line_canvas_resized;
 
     resizeCanvas(CANVAS_WIDTH * SCALING_FACTOR, CANVAS_HEIGHT * SCALING_FACTOR);
 }
