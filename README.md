@@ -6,8 +6,8 @@
 * stroke size varyying
 * map distance between lines und stroke stärke: DISTANCE_BETWEEN_LINES ?
 * create features
-* resize incl. max size
 * cleanup console
+* check color contrasts
 
 * zentrieren anhand von stroke stärke und anzahl der strokes (wie viele gehen sich aus)
 * unterschiedlich stroke stärken für unt. boxen

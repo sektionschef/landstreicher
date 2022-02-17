@@ -37,7 +37,7 @@ let PALETTES = [
   },
   {
     name: "Nur-nuri",
-    stroke_color: "#484848",
+    stroke_color: "#D5D5D5",
     background_color: "#f25e44"
   },
   {
@@ -118,9 +118,8 @@ PADDING_Y = 0;
 STROKE_SPEED = 1;
 STROKE_DISTORT = getRandomFromInterval(0.1, 0.4);
 STROKE_SIZE = getRandomFromInterval(1, 5);
-DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);
+// DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);  // moved to setup
 PALETTE_NAME = CHOSEN_PALETTE.name;
-// STROKE_COLOR = 0;
 STROKE_COLOR = CHOSEN_PALETTE.stroke_color;
 STROKE_RESOLUTION = 1;
 BACKGROUND_COLOR = CHOSEN_PALETTE.background_color;
@@ -215,6 +214,8 @@ function setup() {
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
+
+  DISTANCE_BETWEEN_LINES = map(STROKE_SIZE, 1, 5, 10, 25, true);
 
   let points = create_coordinates_for_boxes(COUNT_OF_POINTS_X, COUNT_OF_POINTS_Y);
   boxes = new Boxes(points[0], points[1], PAIRING_COUNT);
