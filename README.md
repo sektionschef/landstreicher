@@ -4,7 +4,6 @@
 ## Tasks
 
 * stroke size varyying
-* map distance between lines und stroke stärke: DISTANCE_BETWEEN_LINES ?
 * create features
 * cleanup console
 * check color contrasts

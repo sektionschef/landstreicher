@@ -71,6 +71,12 @@ class Line {
         // endShape();
         // pop();
 
+        // NEW
+        if (frameCount % 5 == 0) {
+            STROKE_SIZE = getRandomFromInterval(1, 3);
+            // STROKE_SIZE = STROKE_SIZE * getRandomFromInterval(0, 2);
+        }
+
         // brush
         line_canvas.push();
         line_canvas.noStroke();
