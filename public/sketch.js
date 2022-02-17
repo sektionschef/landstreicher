@@ -96,7 +96,7 @@ let STROKE_SPEED;
 let STROKE_DISTORT;
 let STROKE_SIZE;
 let STROKE_COLOR;
-let STROKE_RESOLUTION;
+// let STROKE_RESOLUTION;
 let BACKGROUND_COLOR;
 let PALETTE_NAME;
 let BACKGROUND_GRAIN;
@@ -107,25 +107,28 @@ SECOND_RUN = true;
 COUNT_OF_POINTS_X = Math.floor(getRandomFromInterval(1, 5));  // 1-5
 COUNT_OF_POINTS_Y = Math.floor(getRandomFromInterval(1, 5));  // 1-5
 
-PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 3));
+PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 4));
 
 
 // PADDING_X = getRandomFromInterval(0, 20);
 // PADDING_Y = getRandomFromInterval(0, 20);
 PADDING_X = 0;
 PADDING_Y = 0;
+
 // STROKE_SPEED = getRandomFromInterval(1, 3);
-STROKE_SPEED = 1;
+// STROKE_SPEED = 5;
 STROKE_DISTORT = getRandomFromInterval(0.1, 0.4);
 STROKE_SIZE = getRandomFromInterval(1, 5);
 // DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);  // moved to setup
 PALETTE_NAME = CHOSEN_PALETTE.name;
 STROKE_COLOR = CHOSEN_PALETTE.stroke_color;
-STROKE_RESOLUTION = 1;
+// STROKE_RESOLUTION = 1;
 BACKGROUND_COLOR = CHOSEN_PALETTE.background_color;
 BACKGROUND_GRAIN = getRandomFromInterval(5, 20);
 
 logging.info("FXHASH: " + fxhash);
+logging.info("COUNT_OF_POINTS_X: " + COUNT_OF_POINTS_X)
+logging.info("COUNT_OF_POINTS_Y: " + COUNT_OF_POINTS_Y)
 logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
 logging.info("PADDING_X: " + PADDING_X);
 logging.info("PADDING_Y: " + PADDING_Y);
@@ -134,7 +137,7 @@ logging.info("STROKE_SPEED: " + STROKE_SPEED);
 logging.info("STROKE_DISTORT: " + STROKE_DISTORT);
 logging.info("STROKE_SIZE: " + STROKE_SIZE);
 logging.info("STROKE_COLOR: " + STROKE_COLOR);
-logging.info("STROKE_RESOLUTION: " + STROKE_RESOLUTION);
+// logging.info("STROKE_RESOLUTION: " + STROKE_RESOLUTION);
 logging.info("BACKGROUND_COLOR: " + BACKGROUND_COLOR);
 logging.info("PALETTE_NAME: " + PALETTE_NAME);
 

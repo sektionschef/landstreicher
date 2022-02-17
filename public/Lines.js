@@ -9,13 +9,16 @@ class Line {
         this.line_color = distortColor(color(STROKE_COLOR));
 
         this.run_complete = false;
+        this.stroke_size_dynamic = STROKE_SIZE;
+        // this.stroke_speed = STROKE_SPEED
+        this.stroke_speed = getRandomFromInterval(1, 1.5);
     }
 
     show() {
 
         if (this.orientation == "x") {
             if (this.x <= this.limit_x) {
-                this.x += STROKE_SPEED;
+                this.x += this.stroke_speed;
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 // if (frameCount % STROKE_RESOLUTION == 0) {
                 //     this.history.push(createVector(this.x, this.y));
@@ -25,7 +28,7 @@ class Line {
             }
         } else if (this.orientation == "y") {
             if (this.y <= this.limit_y) {
-                this.y += STROKE_SPEED;
+                this.y += this.stroke_speed;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 // if (frameCount % STROKE_RESOLUTION == 0) {
                 //     this.history.push(createVector(this.x, this.y));
@@ -35,8 +38,8 @@ class Line {
             }
         } else if (this.orientation == "xy") {
             if (this.x <= this.limit_x && this.y <= this.limit_y) {
-                this.x += STROKE_SPEED;
-                this.y += STROKE_SPEED;
+                this.x += this.stroke_speed;
+                this.y += this.stroke_speed;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 // if (frameCount % STROKE_RESOLUTION == 0) {
@@ -47,8 +50,8 @@ class Line {
             }
         } else if (this.orientation == "yx") {
             if (this.x <= this.limit_x && this.y >= this.limit_y) {
-                this.x += STROKE_SPEED;
-                this.y -= STROKE_SPEED;
+                this.x += this.stroke_speed;
+                this.y -= this.stroke_speed;
                 this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
                 // if (frameCount % STROKE_RESOLUTION == 0) {
@@ -73,15 +76,15 @@ class Line {
 
         // NEW
         if (frameCount % 5 == 0) {
-            STROKE_SIZE = getRandomFromInterval(1, 3);
-            // STROKE_SIZE = STROKE_SIZE * getRandomFromInterval(0, 2);
+            // STROKE_SIZE = getRandomFromInterval(1, 3);
+            this.stroke_size_dynamic += this.stroke_size_dynamic * getRandomFromInterval(-0.05, 0.05);
         }
 
         // brush
         line_canvas.push();
         line_canvas.noStroke();
         line_canvas.fill(this.line_color);
-        line_canvas.circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, STROKE_SIZE);
+        line_canvas.circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, this.stroke_size_dynamic);
         line_canvas.pop()
     }
 }

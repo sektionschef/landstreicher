@@ -107,7 +107,7 @@ class Boxes {
             this.chosen_axis = "y"
             this.chosen = getRandomFromList(this.possible_pairings_y)
             logging.debug("Pairing on the y axis with:");
-            console.log(this.chosen);
+            logging.debug(this.chosen);
         }
     }
 
