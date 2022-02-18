@@ -1,1 +1,1 @@
-window.$fxhashFeatures={Palette:PALETTE_NAME};
+window.$fxhashFeatures={Palette:PALETTE_NAME,Grid:GRID,Pairing:PAIRING_COUNT,"Stroke distort":STROKE_DISTORT_LABEL,"Background grain":BACKGROUND_GRAIN_LABEL};

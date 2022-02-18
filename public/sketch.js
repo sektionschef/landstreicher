@@ -100,15 +100,20 @@ let STROKE_COLOR;
 let BACKGROUND_COLOR;
 let PALETTE_NAME;
 let BACKGROUND_GRAIN;
+let GRID;
+
+let STROKE_DISTORT_LABEL;
+let STROKE_SIZE_LABEL;
+let BACKGROUND_GRAIN_LABEL;
 
 SECOND_RUN = true;
 
 
 COUNT_OF_POINTS_X = Math.floor(getRandomFromInterval(1, 5));  // 1-5
 COUNT_OF_POINTS_Y = Math.floor(getRandomFromInterval(1, 5));  // 1-5
+GRID = COUNT_OF_POINTS_X + "x" + COUNT_OF_POINTS_Y;
 
 PAIRING_COUNT = Math.floor(getRandomFromInterval(1, 4));
-
 
 // PADDING_X = getRandomFromInterval(0, 20);
 // PADDING_Y = getRandomFromInterval(0, 20);
@@ -118,7 +123,7 @@ PADDING_Y = 0;
 // STROKE_SPEED = getRandomFromInterval(1, 3);
 // STROKE_SPEED = 5;
 STROKE_DISTORT = getRandomFromInterval(0.1, 0.4);
-STROKE_SIZE = getRandomFromInterval(1, 5);
+STROKE_SIZE = getRandomFromInterval(2, 5);
 // DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);  // moved to setup
 PALETTE_NAME = CHOSEN_PALETTE.name;
 STROKE_COLOR = CHOSEN_PALETTE.stroke_color;
@@ -127,11 +132,11 @@ BACKGROUND_COLOR = CHOSEN_PALETTE.background_color;
 BACKGROUND_GRAIN = getRandomFromInterval(5, 20);
 
 logging.info("FXHASH: " + fxhash);
-logging.info("COUNT_OF_POINTS_X: " + COUNT_OF_POINTS_X)
-logging.info("COUNT_OF_POINTS_Y: " + COUNT_OF_POINTS_Y)
-logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
+
 logging.info("PADDING_X: " + PADDING_X);
 logging.info("PADDING_Y: " + PADDING_Y);
+logging.info("Grid: " + GRID);
+logging.info("PAIRING_COUNT: " + PAIRING_COUNT)  // how many pairings of boxes.
 logging.info("DISTANCE_BETWEEN_LINES: " + DISTANCE_BETWEEN_LINES);
 logging.info("STROKE_SPEED: " + STROKE_SPEED);
 logging.info("STROKE_DISTORT: " + STROKE_DISTORT);
@@ -143,71 +148,29 @@ logging.info("PALETTE_NAME: " + PALETTE_NAME);
 
 
 
-// if (NUMBER_PARTICLES < 70) {
-//   NUMBER_PARTICLES_LABEL = "Low"
-// } else if (NUMBER_PARTICLES < 100) {
-//   NUMBER_PARTICLES_LABEL = "Medium"
-// } else {
-//   NUMBER_PARTICLES_LABEL = "High"
-// }
+if (STROKE_DISTORT < 0.1) {
+  STROKE_DISTORT_LABEL = "Surgeon"
+} else if (STROKE_DISTORT < 0.3) {
+  STROKE_DISTORT_LABEL = "Average"
+} else {
+  STROKE_DISTORT_LABEL = "Drunk"
+}
 
-// if (EXPLOSION_INTERVAL < 5000) {
-//   EXPLOSION_INTERVAL_LABEL = "Low"
-// } else if (EXPLOSION_INTERVAL < 7000) {
-//   EXPLOSION_INTERVAL_LABEL = "Medium"
-// } else {
-//   EXPLOSION_INTERVAL_LABEL = "High"
-// }
+if (STROKE_SIZE < 3) {
+  STROKE_SIZE_LABEL = "Small"
+} else if (STROKE_SIZE < 4) {
+  STROKE_SIZE_LABEL = "Medium"
+} else {
+  STROKE_SIZE_LABEL = "Large"
+}
 
-
-// if (EXPLOSION_FORCE < 0.4) {
-//   EXPLOSION_FORCE_LABEL = "Low"
-// } else if (EXPLOSION_FORCE < 0.7) {
-//   EXPLOSION_FORCE_LABEL = "Medium"
-// } else {
-//   EXPLOSION_FORCE_LABEL = "High"
-// }
-
-// if (FREEZE_DURATION < 5000) {
-//   FREEZE_DURATION_LABEL = "Low"
-// } else if (FREEZE_DURATION < 7000) {
-//   FREEZE_DURATION_LABEL = "Medium"
-// } else {
-//   FREEZE_DURATION_LABEL = "High"
-// }
-
-// if (EXPLOSION_TO_FREEZE < 30) {
-//   EXPLOSION_TO_FREEZE_LABEL = "Low"
-// } else if (EXPLOSION_TO_FREEZE < 40) {
-//   EXPLOSION_TO_FREEZE_LABEL = "Medium"
-// } else {
-//   EXPLOSION_TO_FREEZE_LABEL = "High"
-// }
-
-
-// if (GRAVITY_SPEED < 0.4) {
-//   GRAVITY_SPEED_LABEL = "Low"
-// } else if (GRAVITY_SPEED < 0.7) {
-//   GRAVITY_SPEED_LABEL = "Medium"
-// } else {
-//   GRAVITY_SPEED_LABEL = "High"
-// }
-
-// logging.info("Palette: " + PALETTE_NAME);
-// // logging.info("Number of particles: " + NUMBER_PARTICLES);
-// logging.info("Number of particles label: " + NUMBER_PARTICLES_LABEL);
-// // logging.info("Explosion interval: " + EXPLOSION_INTERVAL);
-// logging.info("Explosion interval label: " + EXPLOSION_INTERVAL_LABEL);
-// // logging.info("Freeze duration: " + FREEZE_DURATION);
-// logging.info("Freeze duration label: " + FREEZE_DURATION_LABEL);
-// // logging.info("Explosion to freeze: " + EXPLOSION_TO_FREEZE);
-// logging.info("Explosion to freeze label: " + EXPLOSION_TO_FREEZE_LABEL);
-// // logging.info("Explosion force: " + EXPLOSION_FORCE);
-// logging.info("Explosion force label: " + EXPLOSION_FORCE_LABEL);
-// // logging.info("Gravity: " + GRAVITY_SPEED);
-// logging.info("Gravity speed label: " + GRAVITY_SPEED_LABEL);
-
-
+if (BACKGROUND_GRAIN < 10) {
+  BACKGROUND_GRAIN_LABEL = "Easy"
+} else if (BACKGROUND_GRAIN < 15) {
+  BACKGROUND_GRAIN_LABEL = "Peasy"
+} else {
+  BACKGROUND_GRAIN_LABEL = "Cheesy"
+}
 
 function preload() {
   font = loadFont('SourceSansPro-Regular.otf');
