@@ -15,7 +15,7 @@
 // [https://fxhash.xyz/articles/guide-mint-generative-token#features]
 //
 window.$fxhashFeatures = {
-    // "Palette": PALETTE_NAME,
+    "Palette": PALETTE_NAME,
     // "Number of particles": NUMBER_PARTICLES_LABEL,
     // "Explosion interval": EXPLOSION_INTERVAL_LABEL,
     // "Freeze duration": FREEZE_DURATION_LABEL,

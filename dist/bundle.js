@@ -1,1 +1,1 @@
-window.$fxhashFeatures={};
+window.$fxhashFeatures={Palette:PALETTE_NAME};

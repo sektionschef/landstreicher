@@ -16,76 +16,79 @@ class Line {
 
     show() {
 
-        if (this.orientation == "x") {
-            if (this.x <= this.limit_x) {
-                this.x += this.stroke_speed;
-                this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                // if (frameCount % STROKE_RESOLUTION == 0) {
-                //     this.history.push(createVector(this.x, this.y));
-                // }
-            } else {
-                this.run_complete = true;
+        if (this.run_complete == false) {
+
+            if (this.orientation == "x") {
+                if (this.x <= this.limit_x) {
+                    this.x += this.stroke_speed;
+                    this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    // if (frameCount % STROKE_RESOLUTION == 0) {
+                    //     this.history.push(createVector(this.x, this.y));
+                    // }
+                } else {
+                    this.run_complete = true;
+                }
+            } else if (this.orientation == "y") {
+                if (this.y <= this.limit_y) {
+                    this.y += this.stroke_speed;
+                    this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    // if (frameCount % STROKE_RESOLUTION == 0) {
+                    //     this.history.push(createVector(this.x, this.y));
+                    // }
+                } else {
+                    this.run_complete = true;
+                }
+            } else if (this.orientation == "xy") {
+                if (this.x <= this.limit_x && this.y <= this.limit_y) {
+                    this.x += this.stroke_speed;
+                    this.y += this.stroke_speed;
+                    this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    // if (frameCount % STROKE_RESOLUTION == 0) {
+                    //     this.history.push(createVector(this.x, this.y));
+                    // }
+                } else {
+                    this.run_complete = true;
+                }
+            } else if (this.orientation == "yx") {
+                if (this.x <= this.limit_x && this.y >= this.limit_y) {
+                    this.x += this.stroke_speed;
+                    this.y -= this.stroke_speed;
+                    this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    // if (frameCount % STROKE_RESOLUTION == 0) {
+                    //     this.history.push(createVector(this.x, this.y));
+                    // }
+                } else {
+                    this.run_complete = true;
+                }
             }
-        } else if (this.orientation == "y") {
-            if (this.y <= this.limit_y) {
-                this.y += this.stroke_speed;
-                this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                // if (frameCount % STROKE_RESOLUTION == 0) {
-                //     this.history.push(createVector(this.x, this.y));
-                // }
-            } else {
-                this.run_complete = true;
+
+            // traces with history
+            // push();
+            // strokeWeight(STROKE_SIZE);
+            // stroke(this.line_color);
+            // noFill();
+            // beginShape();
+            // for (let i = 0; i < this.history.length; i++) {
+            //     vertex(this.history[i].x * SCALING_FACTOR, this.history[i].y * SCALING_FACTOR);
+            // }
+            // endShape();
+            // pop();
+
+            // NEW
+            if (frameCount % 5 == 0) {
+                // STROKE_SIZE = getRandomFromInterval(1, 3);
+                this.stroke_size_dynamic += this.stroke_size_dynamic * getRandomFromInterval(-0.05, 0.05);
             }
-        } else if (this.orientation == "xy") {
-            if (this.x <= this.limit_x && this.y <= this.limit_y) {
-                this.x += this.stroke_speed;
-                this.y += this.stroke_speed;
-                this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                // if (frameCount % STROKE_RESOLUTION == 0) {
-                //     this.history.push(createVector(this.x, this.y));
-                // }
-            } else {
-                this.run_complete = true;
-            }
-        } else if (this.orientation == "yx") {
-            if (this.x <= this.limit_x && this.y >= this.limit_y) {
-                this.x += this.stroke_speed;
-                this.y -= this.stroke_speed;
-                this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                // if (frameCount % STROKE_RESOLUTION == 0) {
-                //     this.history.push(createVector(this.x, this.y));
-                // }
-            } else {
-                this.run_complete = true;
-            }
+
+            // brush
+            line_canvas.push();
+            line_canvas.noStroke();
+            line_canvas.fill(this.line_color);
+            line_canvas.circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, this.stroke_size_dynamic);
+            line_canvas.pop()
         }
-
-        // traces with history
-        // push();
-        // strokeWeight(STROKE_SIZE);
-        // stroke(this.line_color);
-        // noFill();
-        // beginShape();
-        // for (let i = 0; i < this.history.length; i++) {
-        //     vertex(this.history[i].x * SCALING_FACTOR, this.history[i].y * SCALING_FACTOR);
-        // }
-        // endShape();
-        // pop();
-
-        // NEW
-        if (frameCount % 5 == 0) {
-            // STROKE_SIZE = getRandomFromInterval(1, 3);
-            this.stroke_size_dynamic += this.stroke_size_dynamic * getRandomFromInterval(-0.05, 0.05);
-        }
-
-        // brush
-        line_canvas.push();
-        line_canvas.noStroke();
-        line_canvas.fill(this.line_color);
-        line_canvas.circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, this.stroke_size_dynamic);
-        line_canvas.pop()
     }
 }
 
