@@ -6,12 +6,33 @@ class Line {
         this.limit_x = limit_x;
         this.limit_y = limit_y;
         this.history = [];
-        this.line_color = distortColor(color(STROKE_COLOR), STROKE_NOISE);
+        // this.line_color = distortColor(color(STROKE_COLOR), STROKE_NOISE);  // plain color
 
         this.run_complete = false;
         this.stroke_size_dynamic = STROKE_SIZE;
         // this.stroke_speed = STROKE_SPEED
         this.stroke_speed = getRandomFromInterval(1, 1.5);
+
+        this.create_brush();
+    }
+
+    create_brush() {
+        // put in setup
+        this.circleMask = createGraphics(5, 5);
+        this.circleMask.fill('rgba(0, 0, 0, 1)');
+        this.circleMask.circle(3, 3, 255);
+
+        this.brush_buffer = createGraphics(5, 5);
+        this.brush_buffer.loadPixels()
+        for (let x = 0; x < this.brush_buffer.width; x++) {
+            for (let y = 0; y < this.brush_buffer.height; y++) {
+                this.brush_buffer.set(x, y, distortColor(color(STROKE_COLOR), STROKE_NOISE));
+            }
+        }
+        this.brush_buffer.updatePixels();
+
+        // https://editor.p5js.org/mwburke/sketches/5wv8TgcgX
+        (this.brush_buffer_masked = this.brush_buffer.get()).mask(this.circleMask);
     }
 
     show() {
@@ -84,9 +105,10 @@ class Line {
 
             // brush
             line_canvas.push();
-            line_canvas.noStroke();
-            line_canvas.fill(this.line_color);
-            line_canvas.circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, this.stroke_size_dynamic);
+            // line_canvas.noStroke();
+            // line_canvas.fill(this.line_color);
+            // line_canvas.circle(this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, this.stroke_size_dynamic);
+            line_canvas.image(this.brush_buffer_masked, this.x * SCALING_FACTOR, this.y * SCALING_FACTOR, this.stroke_size_dynamic, this.stroke_size_dynamic);
             line_canvas.pop()
         }
     }

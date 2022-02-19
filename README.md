@@ -1,5 +1,7 @@
 # Landstreicher
 
+max size of stroke als global variable
+
 A couple of strokes wandering through the landscapes. 
 
 The space is randomly cut in segments on both axis. Some of the resulting rectangles are randomly selected to be paired. A second layer with similar ingredients is placed on top.
