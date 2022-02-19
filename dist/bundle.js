@@ -1,1 +1,1 @@
-window.$fxhashFeatures={Palette:PALETTE_NAME,Grid:GRID,Pairing:PAIRING_COUNT,"Stroke distort":STROKE_DISTORT_LABEL,"Background noise":BACKGROUND_NOISE_LABEL,"Stroke noise":STROKE_NOISE_LABEL};
+window.$fxhashFeatures={Palette:PALETTE_NAME,Grid:GRID,Pairing:PAIRING_COUNT,"Stroke distort":STROKE_DISTORT_LABEL,"Stroke size":STROKE_SIZE_LABEL,"Background color":BACKGROUND_NOISE_LABEL,"Stroke color":STROKE_NOISE_LABEL};
