@@ -99,12 +99,12 @@ let STROKE_COLOR;
 // let STROKE_RESOLUTION;
 let BACKGROUND_COLOR;
 let PALETTE_NAME;
-let BACKGROUND_GRAIN;
+let BACKGROUND_NOISE;
 let GRID;
 
 let STROKE_DISTORT_LABEL;
 let STROKE_SIZE_LABEL;
-let BACKGROUND_GRAIN_LABEL;
+let BACKGROUND_NOISE_LABEL;
 
 SECOND_RUN = true;
 
@@ -129,7 +129,7 @@ PALETTE_NAME = CHOSEN_PALETTE.name;
 STROKE_COLOR = CHOSEN_PALETTE.stroke_color;
 // STROKE_RESOLUTION = 1;
 BACKGROUND_COLOR = CHOSEN_PALETTE.background_color;
-BACKGROUND_GRAIN = getRandomFromInterval(5, 20);
+BACKGROUND_NOISE = getRandomFromInterval(5, 20);
 
 logging.info("FXHASH: " + fxhash);
 
@@ -164,12 +164,12 @@ if (STROKE_SIZE < 3) {
   STROKE_SIZE_LABEL = "Large"
 }
 
-if (BACKGROUND_GRAIN < 10) {
-  BACKGROUND_GRAIN_LABEL = "Easy"
-} else if (BACKGROUND_GRAIN < 15) {
-  BACKGROUND_GRAIN_LABEL = "Peasy"
+if (BACKGROUND_NOISE < 10) {
+  BACKGROUND_NOISE_LABEL = "Easy"
+} else if (BACKGROUND_NOISE < 15) {
+  BACKGROUND_NOISE_LABEL = "Peasy"
 } else {
-  BACKGROUND_GRAIN_LABEL = "Cheesy"
+  BACKGROUND_NOISE_LABEL = "Cheesy"
 }
 
 function preload() {
@@ -195,7 +195,7 @@ function setup() {
   background_buffer.loadPixels()
   for (let x = 0; x < background_buffer.width; x++) {
     for (let y = 0; y < background_buffer.height; y++) {
-      background_buffer.set(x, y, distortColor(color(BACKGROUND_COLOR), BACKGROUND_GRAIN));
+      background_buffer.set(x, y, distortColor(color(BACKGROUND_COLOR), BACKGROUND_NOISE));
     }
   }
   background_buffer.updatePixels()

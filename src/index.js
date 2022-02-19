@@ -19,7 +19,7 @@ window.$fxhashFeatures = {
     "Grid": GRID,
     "Pairing": PAIRING_COUNT,
     "Stroke distort": STROKE_DISTORT_LABEL,
-    "Background grain": BACKGROUND_GRAIN_LABEL,
+    "Background noise": BACKGROUND_NOISE_LABEL,
 }
 
 
