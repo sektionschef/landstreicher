@@ -154,7 +154,7 @@ logging.info("PALETTE_NAME: " + PALETTE_NAME);
 
 
 
-if (STROKE_DISTORT < 0.1) {
+if (STROKE_DISTORT < 0.2) {
   STROKE_DISTORT_LABEL = "Surgeon"
 } else if (STROKE_DISTORT < 0.3) {
   STROKE_DISTORT_LABEL = "Average"
@@ -171,19 +171,19 @@ if (STROKE_SIZE < 3) {
 }
 
 if (BACKGROUND_NOISE < 10) {
-  BACKGROUND_NOISE_LABEL = "clean"
+  BACKGROUND_NOISE_LABEL = "Clean"
 } else if (BACKGROUND_NOISE < 15) {
-  BACKGROUND_NOISE_LABEL = "noisy"
+  BACKGROUND_NOISE_LABEL = "Noisy"
 } else {
   BACKGROUND_NOISE_LABEL = "Very noisy"
 }
 
 if (STROKE_NOISE < 10) {
-  STROKE_NOISE_LABEL = "clean"
+  STROKE_NOISE_LABEL = "Clean"
 } else if (STROKE_NOISE < 15) {
-  STROKE_NOISE_LABEL = "noisy"
+  STROKE_NOISE_LABEL = "Noisy"
 } else {
-  STROKE_NOISE_LABEL = "very noisy"
+  STROKE_NOISE_LABEL = "Very noisy"
 }
 
 function preload() {
