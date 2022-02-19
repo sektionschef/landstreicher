@@ -107,6 +107,7 @@ let GRID;
 let STROKE_DISTORT_LABEL;
 let STROKE_SIZE_LABEL;
 let BACKGROUND_NOISE_LABEL;
+let STROKE_NOISE_LABEL;
 
 SECOND_RUN = true;
 
@@ -170,19 +171,19 @@ if (STROKE_SIZE < 3) {
 }
 
 if (BACKGROUND_NOISE < 10) {
-  BACKGROUND_NOISE_LABEL = "Easy"
+  BACKGROUND_NOISE_LABEL = "clean"
 } else if (BACKGROUND_NOISE < 15) {
-  BACKGROUND_NOISE_LABEL = "Peasy"
+  BACKGROUND_NOISE_LABEL = "noisy"
 } else {
-  BACKGROUND_NOISE_LABEL = "Cheesy"
+  BACKGROUND_NOISE_LABEL = "Very noisy"
 }
 
 if (STROKE_NOISE < 10) {
-  STROKE_NOISE_LABEL = "Easy"
+  STROKE_NOISE_LABEL = "clean"
 } else if (STROKE_NOISE < 15) {
-  STROKE_NOISE_LABEL = "Peasy"
+  STROKE_NOISE_LABEL = "noisy"
 } else {
-  STROKE_NOISE_LABEL = "Cheesy"
+  STROKE_NOISE_LABEL = "very noisy"
 }
 
 function preload() {
