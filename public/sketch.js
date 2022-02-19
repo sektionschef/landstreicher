@@ -100,6 +100,7 @@ let STROKE_COLOR;
 let BACKGROUND_COLOR;
 let PALETTE_NAME;
 let BACKGROUND_NOISE;
+let STROKE_NOISE;
 let GRID;
 
 let STROKE_DISTORT_LABEL;
@@ -127,6 +128,7 @@ STROKE_SIZE = getRandomFromInterval(2, 5);
 // DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);  // moved to setup
 PALETTE_NAME = CHOSEN_PALETTE.name;
 STROKE_COLOR = CHOSEN_PALETTE.stroke_color;
+STROKE_NOISE = getRandomFromInterval(5, 15);
 // STROKE_RESOLUTION = 1;
 BACKGROUND_COLOR = CHOSEN_PALETTE.background_color;
 BACKGROUND_NOISE = getRandomFromInterval(5, 20);
@@ -142,6 +144,7 @@ logging.info("STROKE_SPEED: " + STROKE_SPEED);
 logging.info("STROKE_DISTORT: " + STROKE_DISTORT);
 logging.info("STROKE_SIZE: " + STROKE_SIZE);
 logging.info("STROKE_COLOR: " + STROKE_COLOR);
+logging.info("STROKE_NOISE: " + STROKE_NOISE);
 // logging.info("STROKE_RESOLUTION: " + STROKE_RESOLUTION);
 logging.info("BACKGROUND_COLOR: " + BACKGROUND_COLOR);
 logging.info("PALETTE_NAME: " + PALETTE_NAME);

@@ -6,7 +6,7 @@ class Line {
         this.limit_x = limit_x;
         this.limit_y = limit_y;
         this.history = [];
-        this.line_color = distortColor(color(STROKE_COLOR));
+        this.line_color = distortColor(color(STROKE_COLOR), STROKE_NOISE);
 
         this.run_complete = false;
         this.stroke_size_dynamic = STROKE_SIZE;
