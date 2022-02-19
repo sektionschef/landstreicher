@@ -62,7 +62,7 @@ let PALETTES = [
   },
   {
     name: "Beef Burger",
-    stroke_color: "#376F7D",
+    stroke_color: "#abc4c9",
     background_color: "#7A2E1B"
   },
   {
@@ -101,6 +101,7 @@ let BACKGROUND_COLOR;
 let PALETTE_NAME;
 let BACKGROUND_NOISE;
 let STROKE_NOISE;
+let STROKE_NOISE_2;
 let GRID;
 
 let STROKE_DISTORT_LABEL;
@@ -128,7 +129,8 @@ STROKE_SIZE = getRandomFromInterval(2, 5);
 // DISTANCE_BETWEEN_LINES = getRandomFromInterval(10, 25);  // moved to setup
 PALETTE_NAME = CHOSEN_PALETTE.name;
 STROKE_COLOR = CHOSEN_PALETTE.stroke_color;
-STROKE_NOISE = getRandomFromInterval(5, 30);
+STROKE_NOISE = getRandomFromInterval(5, 20);
+STROKE_NOISE_2 = getRandomFromInterval(20, 60);
 // STROKE_RESOLUTION = 1;
 BACKGROUND_COLOR = CHOSEN_PALETTE.background_color;
 BACKGROUND_NOISE = getRandomFromInterval(5, 20);
@@ -173,6 +175,14 @@ if (BACKGROUND_NOISE < 10) {
   BACKGROUND_NOISE_LABEL = "Peasy"
 } else {
   BACKGROUND_NOISE_LABEL = "Cheesy"
+}
+
+if (STROKE_NOISE < 10) {
+  STROKE_NOISE_LABEL = "Easy"
+} else if (STROKE_NOISE < 15) {
+  STROKE_NOISE_LABEL = "Peasy"
+} else {
+  STROKE_NOISE_LABEL = "Cheesy"
 }
 
 function preload() {

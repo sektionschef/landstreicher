@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Landstreicher</title>
-  <meta name="description" content="Painting created with p5.js and matter.js.">
+  <meta name="description" content="Painting created with p5.js.">
   <meta name="author" content="Stefan Schwaha">
 
-  <meta property="og:title" content="Generative painting">
+  <meta property="og:title" content="Landstreicher">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://digitalitility.com">
-  <meta property="og:description" content="Painting created with p5.js and matter.js.">
-  <meta property="og:image" content="thumbnail.gif">
+  <meta property="og:description" content="A couple of strokes wandering through the landscapes.">
+  <meta property="og:image" content="thumbnail.png">
 
   <link rel="icon" href="favicon.ico">
 
@@ -22,7 +22,9 @@
     //---- do not edit the following code (you can indent as you wish)
     let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
     var fxhash = "oo" + Array(49).fill(0).map(_ => alphabet[(Math.random() * alphabet.length) | 0]).join('')
-    // var fxhash = "ooB7QFvXoFEin1UfbGgg1eoGq4br84ENCPTSxmPuSobPpeFLj6r"
+    // var fxhash = "ooN7S7Lb9M9ib8SxjSwQzkNHYxBVhTg5ZtDqkPEUcW32ajRi9Yb"
+    // var fxhash = "oodTR4yw6iWoffEst9usZ1DMZ9RxexLKgxnVdZTfpaUgVL9k6Lj"
+    // var fxhash = "oorAGWyopTcHnbxKz7zTuhywy3GjKevCKJw1re8kfLiYS2nXfeo"
     let b58dec = str => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0)
     let fxhashTrunc = fxhash.slice(2)
     let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}", 'g')
